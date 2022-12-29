@@ -1,0 +1,27 @@
+{
+  "wizard": {
+    "title": "Benvenuto!",
+    "description": "Inserisci i dati necessari per inizializzare l'applicazione.",
+    "form": {
+      "car-model": "Modello dell'automobile",
+      "actual-km": "KM attuali",
+      "submit": "Inizia"
+    }
+  },
+  "add-consumption": {
+    "title": "Nuovo dato"
+  },
+  "list-consumption": {
+    "title": "I tuoi consumi",
+    "no-data-available": "Nessun dato disponibile",
+    "card": {
+      "no-geolocation-available": "Mappa non disponibile"
+    }
+  },
+  "chart-consumption": {
+    "title": "Grafico consumi"
+  },
+  "settings": {
+    "title": "Opzioni"
+  }
+}
