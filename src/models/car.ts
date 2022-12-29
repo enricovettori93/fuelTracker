@@ -3,3 +3,5 @@ export interface Car {
   model: string
   initialKm: number
 }
+
+export type AddCar = Pick<Car, "model" | "initialKm">

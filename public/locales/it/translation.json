@@ -9,19 +9,44 @@
     }
   },
   "add-consumption": {
-    "title": "Nuovo dato"
+    "title": "Nuovo dato",
+    "form": {
+      "date": "Effettuato il",
+      "actual-km": "KM attuali",
+      "quantity": "Quantità",
+      "submit": "Aggiungi"
+    }
   },
   "list-consumption": {
     "title": "I tuoi consumi",
     "no-data-available": "Nessun dato disponibile",
     "card": {
       "no-geolocation-available": "Mappa non disponibile"
+    },
+    "delete-item-modal": {
+      "title": "Eliminare il dato?",
+      "content": "Non sarà possibile recuperare il dato una volta confermata l’operazione.",
+      "submit": "Elimina"
     }
   },
   "chart-consumption": {
     "title": "Grafico consumi"
   },
   "settings": {
-    "title": "Opzioni"
+    "title": "Opzioni",
+    "delete-data": {
+      "title": "Eliminare tutti i dati dell’applicazione?",
+      "description": "Questa operazione è irreversibile e i dati non si potranno più recuperare.",
+      "submit": "Elimina tutti i dati"
+    },
+    "delete-data-modal": {
+      "title": "Eliminare tutti i dati?",
+      "content": "Così facendo verrà cancellato il tuo account e tutti i dati ad esso collegati, l'operazione non è reversibile.",
+      "submit": "Elimina"
+    }
+  },
+  "modal": {
+    "close": "Chiudi",
+    "submit": "Conferma"
   }
 }

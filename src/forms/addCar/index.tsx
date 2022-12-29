@@ -2,16 +2,23 @@ import Card from "@components/card";
 import FormField from "@components/form/field";
 import CarIcon from "@components/icons/car";
 import GraphUpIcon from "@components/icons/graphUp";
-import {FormEvent} from "react";
 import {useTranslation} from "react-i18next";
+import {AddCar} from "@models/car";
+import {FormEvent} from "react";
 
 interface AddCarFormProps {
-  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
+  onSubmit: ({model, initialKm}: AddCar) => void
   submitButtonText: string
 }
 
-const AddCarForm = ({ handleSubmit, submitButtonText }: AddCarFormProps) => {
+const AddCarForm = ({ onSubmit, submitButtonText }: AddCarFormProps) => {
   const { t } = useTranslation();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // todo: props submit
+  }
+
   return (
     <form action="#" onSubmit={handleSubmit}>
       <Card className="mt-10">
@@ -27,7 +34,7 @@ const AddCarForm = ({ handleSubmit, submitButtonText }: AddCarFormProps) => {
             <input id="car-km" type="number" min="0" max="999999" name="car-km" required/>
           </>
         </FormField>
-        <button className="w-full h-14 bg-orange-500 rounded-3xl shadow-lg mt-16">{submitButtonText}</button>
+        <button className="w-full btn bg-orange-500 mt-16">{submitButtonText}</button>
       </Card>
     </form>
   )

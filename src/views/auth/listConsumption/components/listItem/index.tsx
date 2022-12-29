@@ -34,7 +34,7 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
             <span className="ml-4">{ date?.toLocaleDateString() }</span>
           </div>
           <div className="flex items-center">
-            <button onClick={() => onDelete(id)} className="mr-4">
+            <button onClick={(e) => {e.preventDefault(); e.stopPropagation(); onDelete(id)}} className="mr-4">
               <TrashIcon/>
             </button>
             <button onClick={() => setIsOpen(prev => !prev)} className={`transition-all ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
@@ -47,13 +47,13 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
           <span>
             <GraphUpIcon/>
           </span>
-            <span className="ml-3">${refuel.actualKm}</span>
+            <span className="ml-3">${actualKm}</span>
           </div>
           <div className="flex-1 flex items-center">
           <span>
             <SortIcon/>
           </span>
-            <span className="ml-3">${refuel.quantity}</span>
+            <span className="ml-3">${quantity}</span>
           </div>
         </div>
         {
@@ -62,7 +62,7 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
               {
                 !isMapAvailable && (
                   <span>
-                  {t("listConsumption.card.no-geolocation-available")}
+                  {t("list-consumption.card.no-geolocation-available")}
                 </span>
                 )
               }

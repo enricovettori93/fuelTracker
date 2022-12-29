@@ -1,6 +1,8 @@
 import {Refuel} from "@models/refuel";
-import ListItem from "@views/auth/listConsumption/listItem";
+import ListItem from "@views/auth/listConsumption/components/listItem";
 import {useTranslation} from "react-i18next";
+import {useState} from "react";
+import DeleteItemModal from "@views/auth/listConsumption/components/deleteItemModal";
 
 const mockData: Refuel[] = [
   {
@@ -51,12 +53,22 @@ const mockData: Refuel[] = [
 
 const ListConsumption = () => {
   const {t} = useTranslation();
+  const [deletingItemId, setDeletingItemId] = useState<string | null>(null);
   const handleDelete = (id: string) => {
-    // todo: logic implementation
-    console.log('delete', id);
+    setDeletingItemId(id);
   }
 
   const data = mockData;
+
+  const handleDeleteClose = () => {
+    console.log('handle delete close')
+    setDeletingItemId(null);
+  }
+
+  const handleDeleteSubmit = () => {
+    // todo: logic implementation
+    console.log('delete', deletingItemId);
+  }
 
   return (
     <section>
@@ -72,6 +84,11 @@ const ListConsumption = () => {
               data.map(item => <ListItem key={item.id} className={"my-3"} refuel={item} onDelete={handleDelete} />)
             }
           </ul>
+        )
+      }
+      {
+        deletingItemId && (
+          <DeleteItemModal onClose={handleDeleteClose} onSubmit={handleDeleteSubmit}/>
         )
       }
     </section>

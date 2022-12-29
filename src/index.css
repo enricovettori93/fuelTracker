@@ -28,3 +28,15 @@ body {
 input {
   border-bottom: 1px solid black;
 }
+
+@layer components {
+  .btn {
+    @apply px-5 h-14 rounded-3xl shadow-lg text-white;
+  }
+  .btn--orange {
+    @apply bg-orange-500
+  }
+  .btn--danger {
+    @apply bg-red-500
+  }
+}

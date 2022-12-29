@@ -6,3 +6,5 @@ export interface Refuel {
   lat?: number
   lng?: number
 }
+
+export type AddRefuel = Pick<Refuel, "actualKm" | "quantity" | "date" | "lat" | "lng">

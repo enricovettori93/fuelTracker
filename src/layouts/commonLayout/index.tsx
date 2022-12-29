@@ -1,15 +1,17 @@
 import React from "react";
+import {useTranslation} from "react-i18next";
 
 export interface LayoutProps {
-  title: string,
+  titleKey: string,
   children: React.ReactNode
   className?: string
 }
 
-const CommonLayout = ({ title, children, className = "" }: LayoutProps) => {
+const CommonLayout = ({ titleKey, children, className = "" }: LayoutProps) => {
+  const {t} = useTranslation();
   return (
     <div className={`p-5 flex flex-col w-full h-full ${className}`}>
-      <h1 className="text-4xl py-7">{title}</h1>
+      <h1 className="text-4xl py-7">{t(titleKey)}</h1>
       {children}
     </div>
   )

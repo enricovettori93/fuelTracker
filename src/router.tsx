@@ -8,7 +8,6 @@ import AddConsumption from "@views/auth/addConsumption";
 import ListConsumption from "@views/auth/listConsumption";
 import Settings from "@views/auth/settings";
 import CommonLayout from "@layouts/commonLayout";
-import i18n from "@i18n";
 import AuthLayout from "@layouts/authLayout";
 import ChartConsumption from "@views/auth/chartConsumption";
 import Login from "@views/login";
@@ -38,35 +37,35 @@ const router = createBrowserRouter([
   {
     path: routes.WIZARD,
     element:
-      <CommonLayout title={i18n.t("wizard.title")}>
+      <CommonLayout titleKey="wizard.title">
         <Wizard />
       </CommonLayout>,
   },
   {
     path: routes.ADD_CONSUMPTION,
     element:
-      <AuthLayout title={i18n.t("addConsumption.title")}>
+      <AuthLayout titleKey="add-consumption.title">
         <AddConsumption />
       </AuthLayout>,
   },
   {
     path: routes.LIST_CONSUMPTIONS,
     element:
-      <AuthLayout title={i18n.t("listConsumption.title")}>
+      <AuthLayout titleKey="list-consumption.title">
         <ListConsumption />
       </AuthLayout>,
   },
   {
     path: routes.CHART_CONSUMPTIONS,
     element:
-      <AuthLayout title={i18n.t("chartConsumption.title")}>
+      <AuthLayout titleKey="chart-consumption.title">
         <ChartConsumption />
       </AuthLayout>,
   },
   {
     path: routes.SETTINGS,
     element:
-      <AuthLayout title={i18n.t("settings.title")}>
+      <AuthLayout titleKey="settings.title">
         <Settings />
       </AuthLayout>,
   }
