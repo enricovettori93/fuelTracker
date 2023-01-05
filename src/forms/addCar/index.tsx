@@ -16,7 +16,10 @@ const AddCarForm = ({ onSubmit, submitButtonText }: AddCarFormProps) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // todo: props submit
+    const formData = new FormData(e.target as HTMLFormElement);
+    const model = formData.get("car-model")?.toString() ?? "";
+    const initialKm = parseInt(formData.get("car-km")?.toString() ?? "0");
+    onSubmit({ model, initialKm });
   }
 
   return (

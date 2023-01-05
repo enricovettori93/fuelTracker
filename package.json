@@ -10,6 +10,7 @@
     "release": "standard-version"
   },
   "dependencies": {
+    "firebase": "^9.15.0",
     "i18next": "^22.3.0",
     "i18next-http-backend": "^2.1.0",
     "react": "^18.2.0",

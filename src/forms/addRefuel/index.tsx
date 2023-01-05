@@ -20,7 +20,7 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const formValues = Object.fromEntries(formData) as unknown as AddRefuel;
-    onSubmit(formValues);
+    onSubmit({ ...formValues });
   }
 
   return (

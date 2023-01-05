@@ -32,14 +32,17 @@ const router = createBrowserRouter([
   },
   {
     path: routes.LOGIN,
-    element: <Login />,
+    element:
+      <CommonLayout titleKey="wizard.title">
+        <Login />
+      </CommonLayout>,
   },
   {
     path: routes.WIZARD,
     element:
-      <CommonLayout titleKey="wizard.title">
+      <AuthLayout titleKey="wizard.title" withNavbar={false}>
         <Wizard />
-      </CommonLayout>,
+      </AuthLayout>,
   },
   {
     path: routes.ADD_CONSUMPTION,

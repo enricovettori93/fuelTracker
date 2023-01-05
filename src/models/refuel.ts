@@ -2,7 +2,7 @@ export interface Refuel {
   id: string
   actualKm: number
   quantity: number
-  date?: Date
+  date: string
   lat?: number
   lng?: number
 }

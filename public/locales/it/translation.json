@@ -1,7 +1,10 @@
 {
+  "sign-in": {
+    "google-button": "Login con Google"
+  },
   "wizard": {
     "title": "Benvenuto!",
-    "description": "Inserisci i dati necessari per inizializzare l'applicazione.",
+    "description": "Inserisci i dati necessari per aggiungere l'automobile.",
     "form": {
       "car-model": "Modello dell'automobile",
       "actual-km": "KM attuali",
@@ -19,6 +22,7 @@
   },
   "list-consumption": {
     "title": "I tuoi consumi",
+    "load-more": "Carica più risultati",
     "no-data-available": "Nessun dato disponibile",
     "card": {
       "no-geolocation-available": "Mappa non disponibile"

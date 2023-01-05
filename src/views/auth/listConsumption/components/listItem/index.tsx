@@ -31,7 +31,7 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
         <div ref={topRef} className="flex justify-between">
           <div className="flex items-center">
             <CalendarIcon/>
-            <span className="ml-4">{ date?.toLocaleDateString() }</span>
+            <span className="ml-4">{ new Date(date).toLocaleDateString() }</span>
           </div>
           <div className="flex items-center">
             <button onClick={(e) => {e.preventDefault(); e.stopPropagation(); onDelete(id)}} className="mr-4">
@@ -47,13 +47,13 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
           <span>
             <GraphUpIcon/>
           </span>
-            <span className="ml-3">${actualKm}</span>
+            <span className="ml-3">{actualKm}</span>
           </div>
           <div className="flex-1 flex items-center">
           <span>
             <SortIcon/>
           </span>
-            <span className="ml-3">${quantity}</span>
+            <span className="ml-3">{quantity}</span>
           </div>
         </div>
         {
