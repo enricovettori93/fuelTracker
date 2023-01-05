@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from "react";
 import {useTranslation} from "react-i18next";
-import useClickOutside from "@hooks/clickOutside";
+import useClickOutside from "@hooks/useClickOutside";
 
 interface ModalWrapperProps {
   title: string

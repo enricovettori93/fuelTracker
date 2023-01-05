@@ -6,15 +6,16 @@ import {useTranslation} from "react-i18next";
 import GraphUpIcon from "@components/icons/graphUp";
 import SortIcon from "@components/icons/sort";
 import {AddRefuel} from "@models/refuel";
+import usePosition from "@hooks/usePosition";
 
 interface addRefuelFormProps {
   onSubmit: ({date, actualKm, quantity}: AddRefuel) => void
 }
 
 const AddRefuelForm = (props: addRefuelFormProps) => {
-  // todo: handle geopermission for lat & lng
   const {onSubmit} = props;
   const {t} = useTranslation();
+  const {lat, lng, error} = usePosition();
 
   const defaultDateValue = useMemo(() => {
     return new Date().toISOString().slice(0,10);
@@ -24,6 +25,10 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const formValues = Object.fromEntries(formData) as unknown as AddRefuel;
+    if (lat && lng) {
+      formValues.lng = lng;
+      formValues.lat = lat;
+    }
     onSubmit({ ...formValues, createdAt: new Date() });
   }
 
@@ -48,6 +53,11 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
             <input id="quantity" type="number" name="quantity" max="300" min="0" required/>
           </>
         </FormField>
+        {
+          error && (
+            <p className="text-red-400 mb-5">{t("add-refuel.no-position-grant")}</p>
+          )
+        }
         <div className="flex">
           <button className="ml-auto btn bg-orange-500">{t("add-refuel.form.submit")}</button>
         </div>

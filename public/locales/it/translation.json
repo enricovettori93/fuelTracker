@@ -4,6 +4,7 @@
     "generic-error": "Errore nell'operazione"
   },
   "sign-in": {
+    "description": "Questa applicazione ti permette di tenere traccia dei consumi delle tue automobili andando a inserire manualmente i singoli rifornimenti!",
     "google-button": "Login con Google"
   },
   "wizard": {
@@ -17,6 +18,7 @@
   },
   "add-refuel": {
     "title": "Nuovo dato",
+    "no-position-grant": "Non riesco ad accedere ai servizi di posizione 😔",
     "form": {
       "date": "Effettuato il",
       "actual-km": "KM attuali",

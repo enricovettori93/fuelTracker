@@ -10,6 +10,8 @@ import {useNavigate} from "react-router-dom";
 import {routes} from "@router";
 import useCurrentCar from "@hooks/useCurrentCar";
 import useSelectCurrentCar from "@hooks/useSelectCurrentCar";
+import Card from "@components/card";
+import GoogleLogo from "@assets/google-icon.webp";
 
 const Login = () => {
   const { firestore, auth } = getFirebase();
@@ -34,8 +36,16 @@ const Login = () => {
   }, [auth, currentCar]);
 
   return (
-    <div>
-      <button onClick={signInWithGoogle}>{t("sign-in.google-button")}</button>
+    <div className="mt-auto">
+      <Card>
+        <p>{t("sign-in.description")}</p>
+        <div>
+          <button className="text-gray-700 mt-10 flex items-center justify-center w-full" onClick={signInWithGoogle}>
+            <img src={GoogleLogo} alt="google-logo" className="h-5 mr-3"/>
+            {t("sign-in.google-button")}
+          </button>
+        </div>
+      </Card>
     </div>
   )
 }
