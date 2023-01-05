@@ -59,6 +59,20 @@
       "title": "Eliminare tutti i dati?",
       "content": "Così facendo verrà cancellato il tuo account e tutti i dati ad esso collegati, l'operazione non è reversibile.",
       "submit": "Elimina"
+    },
+    "cars-management": {
+      "title": "Gestisci le auto",
+      "no-car": "Nessuna macchina nel tuo account 🤔",
+      "fetch-ko": "Errore nel reperimento delle macchine",
+      "selection-ko": "Errore nella selezione della macchina",
+      "delete-ko": "Errore nella cancellazione della macchina",
+      "delete-ok": "Macchina cancellata con successo",
+      "delete-item-modal": {
+        "title": "Eliminare la macchina?",
+        "content": "Verranno cancellati tutti i dati ad essa associati.",
+        "submit": "Elimina"
+      },
+      "add-car-button": "Aggiungi una macchina"
     }
   },
   "modal": {

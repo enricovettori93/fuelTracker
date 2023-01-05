@@ -50,12 +50,11 @@ const useListRefuels = () => {
       try {
         const detailRefuelRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCar as string, FIRESTORE_COLLECTIONS.REFUELS, deletingItemId);
         await deleteDoc(detailRefuelRef);
+        handleDeleteClose();
         setRefuels(prevState => prevState.filter(item => item.id !== deletingItemId));
         toast.success(t("list-refuels.messages.delete-item-ok"));
       } catch (e) {
         toast.error(t("common.generic-error"));
-      } finally {
-        handleDeleteClose();
       }
     }
   }

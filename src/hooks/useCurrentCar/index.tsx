@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
-import {doc, getDoc} from "firebase/firestore";
+import {doc, onSnapshot} from "firebase/firestore";
 import {AdditionalUserInfo} from "@models/user";
 
 const useCurrentCar = () => {
@@ -9,13 +9,15 @@ const useCurrentCar = () => {
 
   useEffect(() => {
     if (auth.currentUser) {
-      const getData = async () => {
-        const currentUserRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid);
-        const currentUserDoc = await getDoc(currentUserRef);
-        setCurrentCar((currentUserDoc.data() as AdditionalUserInfo).selectedCar)
-      }
+      const currentUserDoc = doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid);
 
-      getData();
+      const currentCarSnapshot = onSnapshot(currentUserDoc, snapshot => {
+        setCurrentCar((snapshot.data() as AdditionalUserInfo).selectedCar)
+      });
+      
+      return () => {
+        currentCarSnapshot();
+      }
     }
   }, [auth.currentUser, firestore]);
 

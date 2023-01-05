@@ -11,7 +11,7 @@ const WizardPage = () => {
   const {handleSubmitNewCar} = useAddCar();
 
   const handleSubmit = async ({model, initialKm}: AddCar) => {
-    await handleSubmitNewCar({model, initialKm});
+    await handleSubmitNewCar({model, initialKm}, true);
     navigate(routes.ADD_REFUEL);
   }
 

@@ -6,8 +6,8 @@ const SettingsPage = () => {
   return (
     <div className="mt-auto">
       <MyAccountSection/>
-      <DeleteAccountSection/>
       <CarsManagementSection/>
+      <DeleteAccountSection/>
     </div>
   )
 }
