@@ -8,11 +8,11 @@ const useAddCar = () => {
   const {t} = useTranslation();
   const {firestore, auth} = getFirebase();
 
-  const handleSubmitNewCar = async ({model, initialKm}: AddCar, setAsDefault: boolean = false) => {
+  const handleSubmitNewCar = async ({model, initialKm, createdAt}: AddCar, setAsDefault: boolean = false) => {
     try {
       const userId = auth.currentUser!.uid;
       const userCarsRef = collection(firestore, FIRESTORE_COLLECTIONS.USERS, userId, FIRESTORE_COLLECTIONS.CARS);
-      const addedCar = await addDoc(userCarsRef,{ model, initialKm });
+      const addedCar = await addDoc(userCarsRef,{ model, initialKm, createdAt });
       if (setAsDefault) {
         const userDocRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, userId);
         await setDoc(userDocRef, { selectedCar: addedCar.id }, { merge: true });

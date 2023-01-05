@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {Refuel} from "@models/refuel";
 import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
 import useCurrentCar from "@hooks/useCurrentCar";
-import {collection, deleteDoc, doc, getDocs, limit, orderBy, query} from "firebase/firestore";
+import {collection, deleteDoc, doc, getDocs, limit, orderBy, query, startAfter} from "firebase/firestore";
 import {toast} from "react-hot-toast";
 import {useTranslation} from "react-i18next";
 
@@ -10,7 +10,7 @@ const useListRefuels = () => {
   const {t} = useTranslation();
   const {firestore, auth} = getFirebase();
   const {currentCar} = useCurrentCar();
-  const QUERY_LIMIT = 100;
+  const QUERY_LIMIT = 50;
   const [refuels, setRefuels] = useState<Refuel[]>([]);
   const [hasMore, setHasMore] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -26,14 +26,22 @@ const useListRefuels = () => {
     try {
       const myRefuelsCollection = collection(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCar as string, FIRESTORE_COLLECTIONS.REFUELS);
       setLoading(true);
+      let refuelQuery;
 
-      const refuelQuery = query(
-        myRefuelsCollection,
-        orderBy('date', 'desc'),
-        // todo: check if it works
-        // startAt(refuels[refuels.length - 1]?.id || ""),
-        limit(QUERY_LIMIT)
-      );
+      if (refuels.length === 0) {
+        refuelQuery = query(
+          myRefuelsCollection,
+          orderBy('createdAt', 'desc'),
+          limit(QUERY_LIMIT)
+        );
+      } else {
+        refuelQuery = query(
+          myRefuelsCollection,
+          orderBy('createdAt', 'desc'),
+          startAfter(refuels[refuels.length - 1]?.createdAt),
+          limit(QUERY_LIMIT)
+        );
+      }
 
       const results = await getDocs(refuelQuery);
       setHasMore(results.docs.length === QUERY_LIMIT);

@@ -1,4 +1,4 @@
-import {FormEvent} from "react";
+import {FormEvent, useMemo} from "react";
 import Card from "@components/card";
 import FormField from "@components/form/field";
 import CalendarIcon from "@components/icons/calendar";
@@ -16,11 +16,15 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
   const {onSubmit} = props;
   const {t} = useTranslation();
 
+  const defaultDateValue = useMemo(() => {
+    return new Date().toISOString().slice(0,10);
+  }, []);
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const formValues = Object.fromEntries(formData) as unknown as AddRefuel;
-    onSubmit({ ...formValues });
+    onSubmit({ ...formValues, createdAt: new Date() });
   }
 
   return (
@@ -29,19 +33,19 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
         <FormField icon={<CalendarIcon/>} className="mb-8">
           <>
             <label htmlFor="date">{t("add-refuel.form.date")}</label>
-            <input id="date" type="date" name="date" required/>
+            <input id="date" type="date" name="date" defaultValue={defaultDateValue} required/>
           </>
         </FormField>
         <FormField icon={<GraphUpIcon/>} className="mb-8">
           <>
             <label htmlFor="actualKm">{t("add-refuel.form.actual-km")}</label>
-            <input id="actualKm" type="number" name="actualKm" required/>
+            <input id="actualKm" type="number" name="actualKm" max="999999" min="0" required/>
           </>
         </FormField>
         <FormField icon={<SortIcon/>} className="mb-8">
           <>
             <label htmlFor="quantity">{t("add-refuel.form.quantity")}</label>
-            <input id="quantity" type="number" name="quantity" required/>
+            <input id="quantity" type="number" name="quantity" max="300" min="0" required/>
           </>
         </FormField>
         <div className="flex">
