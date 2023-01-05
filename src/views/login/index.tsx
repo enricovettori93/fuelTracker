@@ -28,7 +28,7 @@ const Login = () => {
 
         navigate(routes.WIZARD);
       } else {
-        navigate(routes.ADD_CONSUMPTION);
+        navigate(routes.ADD_REFUEL);
       }
     });
   }, [auth, currentCar]);

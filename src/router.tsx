@@ -4,21 +4,21 @@ import {
   redirect,
 } from "react-router-dom";
 import Wizard from "@views/auth/wizard";
-import AddConsumption from "@views/auth/addConsumption";
-import ListConsumption from "@views/auth/listConsumption";
+import AddRefuel from "@views/auth/addRefuel";
+import ListRefuels from "@views/auth/listRefuels";
 import Settings from "@views/auth/settings";
 import CommonLayout from "@layouts/commonLayout";
 import AuthLayout from "@layouts/authLayout";
-import ChartConsumption from "@views/auth/chartConsumption";
+import ChartRefuels from "@views/auth/chartRefuels";
 import Login from "@views/login";
 
 export const routes = {
   ROOT: "/",
   LOGIN: "/login",
   WIZARD: "/app/wizard",
-  ADD_CONSUMPTION: "/app/add",
-  LIST_CONSUMPTIONS: "/app/list",
-  CHART_CONSUMPTIONS: "/app/chart",
+  ADD_REFUEL: "/app/add",
+  LIST_REFUELS: "/app/list",
+  CHART_REFUELS: "/app/chart",
   SETTINGS: "/app/settings"
 }
 
@@ -45,24 +45,24 @@ const router = createBrowserRouter([
       </AuthLayout>,
   },
   {
-    path: routes.ADD_CONSUMPTION,
+    path: routes.ADD_REFUEL,
     element:
-      <AuthLayout titleKey="add-consumption.title">
-        <AddConsumption />
+      <AuthLayout titleKey="add-refuel.title">
+        <AddRefuel />
       </AuthLayout>,
   },
   {
-    path: routes.LIST_CONSUMPTIONS,
+    path: routes.LIST_REFUELS,
     element:
-      <AuthLayout titleKey="list-consumption.title">
-        <ListConsumption />
+      <AuthLayout titleKey="list-refuels.title">
+        <ListRefuels />
       </AuthLayout>,
   },
   {
-    path: routes.CHART_CONSUMPTIONS,
+    path: routes.CHART_REFUELS,
     element:
-      <AuthLayout titleKey="chart-consumption.title">
-        <ChartConsumption />
+      <AuthLayout titleKey="chart-refuels.title">
+        <ChartRefuels />
       </AuthLayout>,
   },
   {

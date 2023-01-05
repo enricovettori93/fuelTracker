@@ -27,13 +27,13 @@ const MenuLink = ({ children, ...restProps }: MenuLinkProps) => {
 const Navbar = () => {
   return (
     <div className="fixed w-screen h-28 bottom-0 left-0 right-0 bg-white flex p-6 items-center justify-between rounded-t-3xl">
-      <MenuLink to={routes.ADD_CONSUMPTION}>
+      <MenuLink to={routes.ADD_REFUEL}>
         <AddIcon/>
       </MenuLink>
-      <MenuLink to={routes.LIST_CONSUMPTIONS}>
+      <MenuLink to={routes.LIST_REFUELS}>
         <ListIcon/>
       </MenuLink>
-      <MenuLink to={routes.CHART_CONSUMPTIONS}>
+      <MenuLink to={routes.CHART_REFUELS}>
         <ChartIcon/>
       </MenuLink>
       <MenuLink to={routes.SETTINGS}>

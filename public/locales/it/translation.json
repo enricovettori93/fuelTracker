@@ -1,4 +1,8 @@
 {
+  "common": {
+    "loading": "Caricamento...",
+    "generic-error": "Errore nell'operazione"
+  },
   "sign-in": {
     "google-button": "Login con Google"
   },
@@ -11,7 +15,7 @@
       "submit": "Inizia"
     }
   },
-  "add-consumption": {
+  "add-refuel": {
     "title": "Nuovo dato",
     "form": {
       "date": "Effettuato il",
@@ -20,7 +24,7 @@
       "submit": "Aggiungi"
     }
   },
-  "list-consumption": {
+  "list-refuels": {
     "title": "I tuoi consumi",
     "load-more": "Carica più risultati",
     "no-data-available": "Nessun dato disponibile",
@@ -31,13 +35,21 @@
       "title": "Eliminare il dato?",
       "content": "Non sarà possibile recuperare il dato una volta confermata l’operazione.",
       "submit": "Elimina"
+    },
+    "messages": {
+      "delete-item-ok": "Elemento eliminato"
     }
   },
-  "chart-consumption": {
+  "chart-refuels": {
     "title": "Grafico consumi"
   },
   "settings": {
     "title": "Opzioni",
+    "my-account": {
+      "title": "Ciao {{fullName}}",
+      "description": "Da questa pagina puoi eseguire il logout, scegliere la tua macchina (se ne hai inserita più di una) o cancellare i tuoi dati.",
+      "logout": "Esegui il logout"
+    },
     "delete-data": {
       "title": "Eliminare tutti i dati dell’applicazione?",
       "description": "Questa operazione è irreversibile e i dati non si potranno più recuperare.",

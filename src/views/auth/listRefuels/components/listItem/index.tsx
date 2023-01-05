@@ -62,7 +62,7 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
               {
                 !isMapAvailable && (
                   <span>
-                  {t("list-consumption.card.no-geolocation-available")}
+                  {t("list-refuels.card.no-geolocation-available")}
                 </span>
                 )
               }

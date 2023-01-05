@@ -3,21 +3,16 @@ import AddCarForm from "@forms/addCar";
 import { useNavigate } from "react-router-dom";
 import {routes} from "@router";
 import {AddCar} from "@models/car";
-import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
-import {addDoc, collection, setDoc, doc} from "firebase/firestore";
+import useAddCar from "@hooks/useAddCar";
 
-const Wizard = () => {
-  const { firestore, auth } = getFirebase();
-  const { t } = useTranslation();
+const WizardPage = () => {
+  const {t} = useTranslation();
   const navigate = useNavigate();
+  const {handleSubmitNewCar} = useAddCar();
 
   const handleSubmit = async ({model, initialKm}: AddCar) => {
-    const userId = auth.currentUser!.uid;
-    const userCarsRef = collection(firestore, FIRESTORE_COLLECTIONS.USERS, userId, FIRESTORE_COLLECTIONS.CARS);
-    const addedCar = await addDoc(userCarsRef,{ model, initialKm });
-    const userDocRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, userId);
-    await setDoc(userDocRef, { selectedCar: addedCar.id }, { merge: true });
-    navigate(routes.ADD_CONSUMPTION);
+    await handleSubmitNewCar({model, initialKm});
+    navigate(routes.ADD_REFUEL);
   }
 
   return (
@@ -28,4 +23,4 @@ const Wizard = () => {
   )
 }
 
-export default Wizard;
+export default WizardPage;

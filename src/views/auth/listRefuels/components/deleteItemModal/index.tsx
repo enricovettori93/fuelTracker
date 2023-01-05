@@ -8,11 +8,11 @@ interface DeleteItemModalProps {
 
 const DeleteItemModal = ({onSubmit, onClose}: DeleteItemModalProps) => {
   const {t} = useTranslation();
-  const submitText = t("list-consumption.delete-item-modal.submit");
+  const submitText = t("list-refuels.delete-item-modal.submit");
 
   return (
-    <ModalWrapper title={t("list-consumption.delete-item-modal.title")} btnSubmitText={submitText} onSubmit={onSubmit} onClose={onClose}>
-      <p>{t("list-consumption.delete-item-modal.content")}</p>
+    <ModalWrapper title={t("list-refuels.delete-item-modal.title")} btnSubmitText={submitText} onSubmit={onSubmit} onClose={onClose}>
+      <p>{t("list-refuels.delete-item-modal.content")}</p>
     </ModalWrapper>
   )
 }
