@@ -53,7 +53,7 @@ const CarsManagementSection = () => {
         )
       }
       <div className="mt-4">
-        <button className="btn btn--orange">
+        <button className="btn btn--orange w-full">
           <Link to={routes.WIZARD}>{t("settings.cars-management.add-car-button")}</Link>
         </button>
       </div>

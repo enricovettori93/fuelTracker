@@ -20,7 +20,7 @@ const useListCars = () => {
         toast.success(t("settings.cars-management.delete-ok"));
       } catch (e) {
         toast.error(t("settings.cars-management.delete-ko"));
-        throw new Error("Cannot delete the car", {cause: e})
+        throw new Error("Cannot delete the car", {cause: e});
       }
     }
   }

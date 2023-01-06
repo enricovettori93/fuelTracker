@@ -1,7 +1,8 @@
 {
   "common": {
     "loading": "Caricamento...",
-    "generic-error": "Errore nell'operazione"
+    "generic-error": "Errore nell'operazione",
+    "no-data-available": "Nessun dato disponibile"
   },
   "sign-in": {
     "description": "Questa applicazione ti permette di tenere traccia dei consumi delle tue automobili andando a inserire manualmente i singoli rifornimenti!",
@@ -29,7 +30,6 @@
   "list-refuels": {
     "title": "I tuoi consumi",
     "load-more": "Carica più risultati",
-    "no-data-available": "Nessun dato disponibile",
     "card": {
       "no-geolocation-available": "Mappa non disponibile"
     },
@@ -75,6 +75,17 @@
         "submit": "Elimina"
       },
       "add-car-button": "Aggiungi una macchina"
+    }
+  },
+  "chart-page": {
+    "form": {
+      "from": "Da",
+      "to": "A",
+      "submit": "Visualizza il grafico",
+      "errors": {
+        "to-equal-from": "Le date non possono coincidere",
+        "from-greater-to": "La data 'da' non può essere maggiore della data 'a'"
+      }
     }
   },
   "modal": {

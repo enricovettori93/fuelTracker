@@ -7,13 +7,16 @@ import GraphUpIcon from "@components/icons/graphUp";
 import SortIcon from "@components/icons/sort";
 import {AddRefuel} from "@models/refuel";
 import usePosition from "@hooks/usePosition";
+import ButtonSubmit from "@components/form/buttonSubmit";
 
 interface addRefuelFormProps {
   onSubmit: ({date, actualKm, quantity}: AddRefuel) => void
+  isLoading: boolean
+  minMileage?: number
 }
 
 const AddRefuelForm = (props: addRefuelFormProps) => {
-  const {onSubmit} = props;
+  const {onSubmit, isLoading, minMileage = 0} = props;
   const {t} = useTranslation();
   const {lat, lng, error} = usePosition();
 
@@ -25,7 +28,7 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const formValues = Object.fromEntries(formData) as unknown as AddRefuel;
-    if (lat && lng) {
+    if (lat !== null && lng !== null) {
       formValues.lng = lng;
       formValues.lat = lat;
     }
@@ -44,7 +47,7 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
         <FormField icon={<GraphUpIcon/>} className="mb-8">
           <>
             <label htmlFor="actualKm">{t("add-refuel.form.actual-km")}</label>
-            <input id="actualKm" type="number" name="actualKm" max="999999" min="0" required/>
+            <input id="actualKm" type="number" name="actualKm" max="999999" min={minMileage} required/>
           </>
         </FormField>
         <FormField icon={<SortIcon/>} className="mb-8">
@@ -59,7 +62,7 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
           )
         }
         <div className="flex">
-          <button className="ml-auto btn bg-orange-500">{t("add-refuel.form.submit")}</button>
+          <ButtonSubmit isLoading={isLoading} text={t("add-refuel.form.submit")} className="btn bg-orange-500 w-full"/>
         </div>
       </Card>
     </form>

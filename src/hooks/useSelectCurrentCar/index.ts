@@ -14,7 +14,7 @@ const useSelectCurrentCar = () => {
       });
     } catch (e) {
       toast.error(t("settings.cars-management.selection-ko"));
-      throw new Error("Cannot select the car", {cause: e})
+      throw new Error("Cannot select the car", {cause: e});
     }
   }
 

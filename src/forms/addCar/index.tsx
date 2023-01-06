@@ -7,7 +7,7 @@ import {AddCar} from "@models/car";
 import {FormEvent} from "react";
 
 interface AddCarFormProps {
-  onSubmit: ({model, initialKm}: AddCar) => void
+  onSubmit: ({model, initialKm, createdAt}: AddCar) => void
   submitButtonText: string
 }
 
@@ -19,7 +19,7 @@ const AddCarForm = ({ onSubmit, submitButtonText }: AddCarFormProps) => {
     const formData = new FormData(e.target as HTMLFormElement);
     const model = formData.get("car-model")?.toString() ?? "";
     const initialKm = parseInt(formData.get("car-km")?.toString() ?? "0");
-    onSubmit({ model, initialKm });
+    onSubmit({ model, initialKm, createdAt: new Date() });
   }
 
   return (

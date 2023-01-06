@@ -25,7 +25,7 @@ const ListRefuelsPage = () => {
       }
       {
         refuels.length === 0 && !loading && (
-          <span>{t("list-refuels.no-data-available")}</span>
+          <span>{t("common.no-data-available")}</span>
         )
       }
       {

@@ -3,10 +3,12 @@ import {AddRefuel} from "@models/refuel";
 import {useNavigate} from "react-router-dom";
 import {routes} from "@router";
 import useAddRefuel from "@views/auth/addRefuel/hooks/useAddRefuel";
+import useCurrentCarMileage from "@hooks/useCurrentCarMileage";
 
 const AddRefuelPage = () => {
   const navigate = useNavigate();
-  const {handleSubmitNewRefuel} = useAddRefuel();
+  const {loading, handleSubmitNewRefuel} = useAddRefuel();
+  const {carMileage} = useCurrentCarMileage();
 
   const handleSubmit = async (data: AddRefuel) => {
     await handleSubmitNewRefuel(data);
@@ -15,7 +17,7 @@ const AddRefuelPage = () => {
 
   return (
     <div className="mt-auto">
-      <AddRefuelForm onSubmit={handleSubmit} />
+      <AddRefuelForm isLoading={loading} onSubmit={handleSubmit} minMileage={carMileage} />
     </div>
   )
 }
