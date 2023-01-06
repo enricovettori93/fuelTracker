@@ -53,7 +53,7 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
         <FormField icon={<SortIcon/>} className="mb-8">
           <>
             <label htmlFor="quantity">{t("add-refuel.form.quantity")}</label>
-            <input id="quantity" type="number" name="quantity" max="300" min="0" required/>
+            <input id="quantity" type="number" name="quantity" max="300" min="0" step=".01" required/>
           </>
         </FormField>
         {

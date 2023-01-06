@@ -36,11 +36,21 @@ const ChartRefuelsPage = () => {
   const {refuels, loading, getData} = useSearchRefuel();
 
   const chartData = () => {
-    const labels = refuels.map(refuel => refuel.actualKm);
+    const labels: string[] = []
+    const averageConsumption: number[] = [];
+
+    if (refuels.length > 1) {
+      refuels.forEach((refuel, index) => {
+        labels.push(refuel.actualKm.toString());
+        if (index > 0) {
+          averageConsumption.push((refuel.actualKm - refuels[index - 1].actualKm) / refuel.quantity);
+        }
+      });
+    }
 
     const datasets = [
       {
-        data: refuels.map(refuel => refuel.quantity),
+        data: averageConsumption,
         borderColor: 'rgb(249, 115, 22)',
         backgroundColor: 'rgba(249, 115, 22, 0.5)',
       }
