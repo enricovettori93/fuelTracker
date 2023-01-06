@@ -1,5 +1,5 @@
 import SelectRangeDate from "@forms/selectRangeDate";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -35,7 +35,7 @@ const ChartRefuelsPage = () => {
   const [showChart, setShowChart] = useState<boolean>(false);
   const {refuels, loading, getData} = useSearchRefuel();
 
-  const chartData = () => {
+  const chartData = useMemo(() => {
     const labels: string[] = []
     const averageConsumption: number[] = [];
 
@@ -60,7 +60,7 @@ const ChartRefuelsPage = () => {
       labels,
       datasets
     }
-  };
+  }, [refuels]);
 
   const handleSelectRangeDate = async ({from, to}: {from: string, to: string}) => {
     // show the cart at the first user's interaction
@@ -78,7 +78,7 @@ const ChartRefuelsPage = () => {
         }
         {
           refuels.length > 0 && (
-            <Line data={chartData()} options={chartOptions}/>
+            <Line data={chartData} options={chartOptions}/>
           )
         }
       </Card>
