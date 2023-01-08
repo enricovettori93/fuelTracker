@@ -1,6 +1,7 @@
-import React, {useEffect, useRef} from "react";
+import React, {useRef} from "react";
 import {useTranslation} from "react-i18next";
 import useClickOutside from "@hooks/useClickOutside";
+import FullScreenOverlay from "@components/fullScreenOverlay";
 
 interface ModalWrapperProps {
   title: string
@@ -23,7 +24,7 @@ const ModalWrapper = (props: ModalWrapperProps) => {
   });
 
   return (
-    <div className="fixed inset-0 bg-gray-300 bg-opacity-50 z-40 flex justify-center items-center">
+    <FullScreenOverlay className="flex justify-center items-center">
       <div ref={modalRef} className="z-50 p-4 overflow-x-hidden overflow-y-auto">
         <div className="relative bg-white rounded-3xl p-10">
           <div className="text-3xl font-medium">
@@ -42,7 +43,7 @@ const ModalWrapper = (props: ModalWrapperProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </FullScreenOverlay>
   )
 }
 

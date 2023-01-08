@@ -1,66 +1,20 @@
 import SelectRangeDate from "@forms/selectRangeDate";
-import {useMemo, useState} from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
-} from 'chart.js';
-import {Line} from 'react-chartjs-2';
+import {useState} from "react";
 import Card from "@components/card";
 import useSearchRefuel from "@views/auth/chartRefuels/hooks/useSearchRefuel";
 import {useTranslation} from "react-i18next";
+import RefuelsGraph from "@views/auth/chartRefuels/components/refuelsGraph";
+import FullScreenOverlay from "@components/fullScreenOverlay";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip
-);
-
-const chartOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-  },
+const fullScreenChartOptions = {
+  responsive: false
 };
 
 const ChartRefuelsPage = () => {
   const {t} = useTranslation();
   const [showChart, setShowChart] = useState<boolean>(false);
+  const [showChartFullScreen, setShowChartFullScreen] = useState<boolean>(false);
   const {refuels, loading, getData} = useSearchRefuel();
-
-  const chartData = useMemo(() => {
-    const labels: string[] = []
-    const averageConsumption: number[] = [];
-
-    if (refuels.length > 1) {
-      refuels.forEach((refuel, index) => {
-        labels.push(refuel.actualKm.toString());
-        if (index > 0) {
-          averageConsumption.push((refuel.actualKm - refuels[index - 1].actualKm) / refuel.quantity);
-        }
-      });
-    }
-
-    const datasets = [
-      {
-        data: averageConsumption,
-        borderColor: 'rgb(249, 115, 22)',
-        backgroundColor: 'rgba(249, 115, 22, 0.5)',
-      }
-    ];
-
-    return {
-      labels,
-      datasets
-    }
-  }, [refuels]);
 
   const handleSelectRangeDate = async ({from, to}: {from: string, to: string}) => {
     // show the cart at the first user's interaction
@@ -68,9 +22,16 @@ const ChartRefuelsPage = () => {
     await getData({from, to});
   }
 
+  const toggleFullScreenOverlay = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowChartFullScreen(prev => !prev);
+  }
+
   return (
     <div>
-      <Card className={`mb-10 transition-all ${showChart ? 'opacity-100' : 'opacity-0'}`}>
+      <Card className={`mb-10 transition-all ${showChart ? 'opacity-100' : 'opacity-0'} relative`}>
+        <i className="ci-expand absolute top-3 right-3 cursor:pointer" onClick={toggleFullScreenOverlay}/>
         {
           refuels.length === 0 && (
             <span>{t("common.no-data-available")}</span>
@@ -78,10 +39,22 @@ const ChartRefuelsPage = () => {
         }
         {
           refuels.length > 0 && (
-            <Line data={chartData} options={chartOptions}/>
+            <RefuelsGraph refuels={refuels}/>
           )
         }
       </Card>
+      {
+        showChartFullScreen && (
+          <FullScreenOverlay className="flex justify-center items-center">
+            <Card className="relative w-[80vw] h-[90vh]">
+              <i className="ci-shrink absolute bottom-3 right-3 cursor:pointer" onClick={toggleFullScreenOverlay}/>
+              <div className="w-full h-full inset-0 relative flex justify-center items-center">
+                <RefuelsGraph refuels={refuels} options={fullScreenChartOptions} className="portrait:rotate-90 scale-[1.7]"/>
+              </div>
+            </Card>
+          </FullScreenOverlay>
+        )
+      }
       <SelectRangeDate isLoading={loading} onSelect={handleSelectRangeDate}/>
     </div>
   )
