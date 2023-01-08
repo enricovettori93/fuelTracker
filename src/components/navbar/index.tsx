@@ -1,10 +1,6 @@
 import React from "react";
 import {NavLink, NavLinkProps} from "react-router-dom";
 import {routes} from "@router";
-import AddIcon from "@components/icons/add";
-import SettingsIcon from "@components/icons/settings";
-import ListIcon from "@components/icons/list";
-import ChartIcon from "@components/icons/chart";
 
 interface MenuLinkProps extends NavLinkProps {
   children: React.ReactNode
@@ -15,7 +11,7 @@ const MenuLink = ({ children, ...restProps }: MenuLinkProps) => {
     <NavLink {...restProps} className={({ isActive }) => {
       const commonClasses = "transition-all text-center p-4 rounded-full";
       if (isActive) {
-        return `${commonClasses} bg-orange-100 text-orange-100`;
+        return `${commonClasses} bg-orange-100 text-orange-600`;
       }
       return commonClasses;
     }}>
@@ -26,20 +22,20 @@ const MenuLink = ({ children, ...restProps }: MenuLinkProps) => {
 
 const Navbar = () => {
   return (
-    <div className="fixed w-screen h-28 bottom-0 left-0 right-0 bg-white flex p-6 items-center justify-between rounded-t-3xl">
+    <nav className="navbar fixed w-screen h-28 bottom-0 left-0 right-0 bg-white flex p-6 items-center justify-between rounded-t-3xl">
       <MenuLink to={routes.ADD_REFUEL}>
-        <AddIcon/>
+        <i className="ci-add_to_queue"/>
       </MenuLink>
       <MenuLink to={routes.LIST_REFUELS}>
-        <ListIcon/>
+        <i className="ci-list_checklist"/>
       </MenuLink>
       <MenuLink to={routes.CHART_REFUELS}>
-        <ChartIcon/>
+        <i className="ci-line_chart_up"/>
       </MenuLink>
       <MenuLink to={routes.SETTINGS}>
-        <SettingsIcon/>
+        <i className="ci-settings_filled"/>
       </MenuLink>
-    </div>
+    </nav>
   )
 }
 

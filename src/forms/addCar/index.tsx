@@ -1,10 +1,8 @@
 import Card from "@components/card";
 import FormField from "@components/form/field";
-import CarIcon from "@components/icons/car";
-import GraphUpIcon from "@components/icons/graphUp";
 import {useTranslation} from "react-i18next";
 import {AddCar} from "@models/car";
-import {FormEvent} from "react";
+import React, {FormEvent} from "react";
 
 interface AddCarFormProps {
   onSubmit: ({model, initialKm, createdAt}: AddCar) => void
@@ -25,13 +23,13 @@ const AddCarForm = ({ onSubmit, submitButtonText }: AddCarFormProps) => {
   return (
     <form action="#" onSubmit={handleSubmit}>
       <Card className="mt-10">
-        <FormField icon={<CarIcon/>} className="mb-8">
+        <FormField icon={<i className="ci-link_02"/>} className="mb-8">
           <>
             <label htmlFor="car-model">{t("wizard.form.car-model")}</label>
             <input id="car-model" type="text" name="car-model" required/>
           </>
         </FormField>
-        <FormField icon={<GraphUpIcon/>}>
+        <FormField icon={<i className="ci-trending_up"/>}>
           <>
             <label htmlFor="car-km">{t("wizard.form.actual-km")}</label>
             <input id="car-km" type="number" min="0" max="999999" name="car-km" required/>

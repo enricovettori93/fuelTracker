@@ -1,8 +1,7 @@
-import {FormEvent, useState} from "react";
+import React, {FormEvent, useState} from "react";
 import FormField from "@components/form/field";
 import Card from "@components/card";
 import {useTranslation} from "react-i18next";
-import CalendarIcon from "@components/icons/calendar";
 import {subtractMonths} from "@utilities";
 import ButtonSubmit from "@components/form/buttonSubmit";
 
@@ -42,13 +41,13 @@ const SelectRangeDate = ({onSelect, isLoading = false}: SelectRangeDateProps) =>
   return (
     <form action="#" onSubmit={handleFormSubmit}>
       <Card>
-        <FormField icon={<CalendarIcon/>} className="mb-8">
+        <FormField icon={<i className="ci-calendar"/>} className="mb-8">
           <>
             <label htmlFor="from">{t("chart-page.form.from")}</label>
             <input id="from" type="date" name="from" required defaultValue={from} onChange={e => setFrom(e.target.value)}/>
           </>
         </FormField>
-        <FormField icon={<CalendarIcon/>}>
+        <FormField icon={<i className="ci-calendar"/>}>
           <>
             <label htmlFor="to">{t("chart-page.form.to")}</label>
             <input id="to" type="date" name="to" required defaultValue={to} onChange={e => setTo(e.target.value)}/>

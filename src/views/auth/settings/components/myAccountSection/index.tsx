@@ -19,6 +19,7 @@ const MyAccountSection = () => {
       <p className="text-xl font-bold">{t("settings.my-account.title", { fullName: `${auth.currentUser?.displayName}` })}</p>
       <p className="my-4 font-light text-gray-700">{t("settings.my-account.description")}</p>
       <button onClick={handleLogout} className="btn btn--orange w-full flex items-center justify-center">
+        <i className="ci-exit"/>
         <span className="ml-3">{t("settings.my-account.logout")}</span>
       </button>
     </Card>

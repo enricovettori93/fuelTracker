@@ -1,7 +1,6 @@
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import Card from "@components/card";
-import TrashIcon from "@components/icons/trash";
 import DeleteAccountModal from "@views/auth/settings/components/deleteAccountSection/deleteAccountModal";
 
 const DeleteAccountSection = () => {
@@ -26,7 +25,7 @@ const DeleteAccountSection = () => {
         <p className="text-xl font-bold">{t("settings.delete-data.title")}</p>
         <p className="my-4 font-light text-gray-700">{t("settings.delete-data.description")}</p>
         <button onClick={e => {e.stopPropagation(); e.preventDefault(); handleModalOpen()}} className="btn btn--danger w-full flex items-center justify-center">
-          <TrashIcon/>
+          <i className="ci-warning_outline"/>
           <span className="ml-3">{t("settings.delete-data.submit")}</span>
         </button>
       </Card>

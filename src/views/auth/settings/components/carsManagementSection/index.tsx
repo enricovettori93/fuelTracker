@@ -53,7 +53,8 @@ const CarsManagementSection = () => {
         )
       }
       <div className="mt-4">
-        <button className="btn btn--orange w-full">
+        <button className="btn btn--orange w-full flex items-center justify-center">
+          <i className="ci-plus_circle_outline mr-3"/>
           <Link to={routes.WIZARD}>{t("settings.cars-management.add-car-button")}</Link>
         </button>
       </div>

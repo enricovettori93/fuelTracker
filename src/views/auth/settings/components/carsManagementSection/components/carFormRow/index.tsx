@@ -1,5 +1,4 @@
 import {Car} from "@models/car";
-import TrashIcon from "@components/icons/trash";
 
 interface CarFormRowProps {
   car: Car
@@ -27,9 +26,9 @@ const CarFormRow = (props: CarFormRowProps) => {
       </div>
       <button
         disabled={isDeleteButtonDisabled}
-        className="btn btn--danger h-10 w-10 flex justify-between items-center disabled:opacity-75"
+        className="btn btn--danger h-10 w-10 flex justify-center items-center disabled:opacity-75"
         onClick={(e) => {e.preventDefault(); e.stopPropagation(); onDeleteCar(car.id)}}>
-        <TrashIcon/>
+        <i className="ci-trash_full !text-[1rem]"/>
       </button>
     </div>
   )

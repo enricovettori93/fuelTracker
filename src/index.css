@@ -40,3 +40,11 @@ input {
     @apply bg-red-500
   }
 }
+
+nav i[class*="ci-"] {
+  font-size: 2rem;
+}
+
+i[class*="ci-"] {
+  font-size: 1.3rem;
+}

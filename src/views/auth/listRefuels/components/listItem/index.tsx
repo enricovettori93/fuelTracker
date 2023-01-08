@@ -1,12 +1,7 @@
 import {Refuel} from "@models/refuel";
 import Card from "@components/card";
-import {createRef, useMemo, useState} from "react";
-import CalendarIcon from "@components/icons/calendar";
-import TrashIcon from "@components/icons/trash";
-import ArrowIcon from "@components/icons/arrow";
+import React, {createRef, useMemo, useState} from "react";
 import {useTranslation} from "react-i18next";
-import GraphUpIcon from "@components/icons/graphUp";
-import SortIcon from "@components/icons/sort";
 
 interface ListItemProps {
   className?: string
@@ -30,28 +25,28 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
       <Card className={className}>
         <div ref={topRef} className="flex justify-between">
           <div className="flex items-center">
-            <CalendarIcon/>
+            <i className="ci-calendar"/>
             <span className="ml-4">{ new Date(date).toLocaleDateString() }</span>
           </div>
           <div className="flex items-center">
             <button onClick={(e) => {e.preventDefault(); e.stopPropagation(); onDelete(id)}} className="mr-4">
-              <TrashIcon/>
+              <i className="ci-trash_full"/>
             </button>
             <button onClick={() => setIsOpen(prev => !prev)} className={`transition-all ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
-              <ArrowIcon/>
+              <i className="ci-chevron_down"/>
             </button>
           </div>
         </div>
         <div className="flex mt-4">
           <div className="flex-1 flex items-center">
           <span>
-            <GraphUpIcon/>
+            <i className="ci-trending_up"/>
           </span>
             <span className="ml-3">{actualKm}</span>
           </div>
           <div className="flex-1 flex items-center">
           <span>
-            <SortIcon/>
+            <i className="ci-filter"/>
           </span>
             <span className="ml-3">{quantity}</span>
           </div>
@@ -62,8 +57,8 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
               {
                 !isMapAvailable && (
                   <span>
-                  {t("list-refuels.card.no-geolocation-available")}
-                </span>
+                    {t("list-refuels.card.no-geolocation-available")}
+                  </span>
                 )
               }
               {
