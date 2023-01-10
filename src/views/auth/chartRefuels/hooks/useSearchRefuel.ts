@@ -1,15 +1,15 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Refuel} from "@models/refuel";
 import {collection, query, orderBy, startAt, endAt, getDocs} from "firebase/firestore";
 import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
-import useCurrentCar from "@hooks/car/useCurrentCar";
 import {toast} from "react-hot-toast";
 import {useTranslation} from "react-i18next";
+import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/CurrentCarContextProvider";
 
 const useSearchRefuel = () => {
   const {t} = useTranslation();
   const {firestore, auth} = getFirebase();
-  const {currentCar} = useCurrentCar();
+  const {currentCarId} = useContext(CurrentCarContext);
   const [refuels, setRefuels] = useState<Refuel[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -19,7 +19,7 @@ const useSearchRefuel = () => {
   }) => {
     try {
       setLoading(true);
-      const refuelsCollectionRef = collection(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCar as string, FIRESTORE_COLLECTIONS.REFUELS);
+      const refuelsCollectionRef = collection(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCarId as string, FIRESTORE_COLLECTIONS.REFUELS);
 
       const refuelQuery = query(
         refuelsCollectionRef,

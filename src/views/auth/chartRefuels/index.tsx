@@ -1,11 +1,11 @@
 import SelectRangeDateForm from "@forms/selectRangeDate";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import Card from "@components/card";
 import useSearchRefuel from "@views/auth/chartRefuels/hooks/useSearchRefuel";
 import {useTranslation} from "react-i18next";
 import RefuelsGraph from "@views/auth/chartRefuels/components/refuelsGraph";
 import FullScreenOverlay from "@components/fullScreenOverlay";
-import useCurrentCar from "@hooks/car/useCurrentCar";
+import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/CurrentCarContextProvider";
 
 const fullScreenChartOptions = {
   responsive: false
@@ -16,7 +16,7 @@ const ChartRefuelsPage = () => {
   const [showChart, setShowChart] = useState<boolean>(false);
   const [showChartFullScreen, setShowChartFullScreen] = useState<boolean>(false);
   const {refuels, loading, getData} = useSearchRefuel();
-  const {currentCar} = useCurrentCar();
+  const {currentCarId} = useContext(CurrentCarContext);
 
   const handleSelectRangeDate = async ({from, to}: {from: string, to: string}) => {
     // show the cart at the first user's interaction
@@ -61,8 +61,8 @@ const ChartRefuelsPage = () => {
       }
       <SelectRangeDateForm
         isLoading={loading}
-        isFormDisabled={!currentCar}
-        errorMessage={!currentCar ? t("common.must-insert-car-first") : null}
+        isFormDisabled={!currentCarId}
+        errorMessage={!currentCarId ? t("common.must-insert-car-first") : null}
         onSelect={handleSelectRangeDate}
       />
     </div>

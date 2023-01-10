@@ -4,6 +4,7 @@ import getFirebase from "@firebase/firebase";
 import {useLocation, useNavigate} from "react-router-dom";
 import {routes} from "@router";
 import {useEffect} from "react";
+import CurrentCarContextProvider from "@layouts/authLayout/contexts/currentCar/CurrentCarContextProvider";
 
 interface AuthLayoutProps extends LayoutProps {
   withNavbar?: boolean
@@ -21,10 +22,12 @@ const AuthLayout = ({ titleKey, children, withNavbar = true }: AuthLayoutProps) 
   }, [auth.currentUser]);
 
   return (
-    <CommonLayout titleKey={titleKey} className="overflow-y-auto pb-36">
-      {children}
-      {withNavbar && <Navbar/>}
-    </CommonLayout>
+    <CurrentCarContextProvider>
+      <CommonLayout titleKey={titleKey} className="overflow-y-auto pb-36">
+        {children}
+        {withNavbar && <Navbar/>}
+      </CommonLayout>
+    </CurrentCarContextProvider>
   )
 }
 

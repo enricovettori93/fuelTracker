@@ -1,20 +1,20 @@
-import {useEffect, useState} from "react";
-import useCurrentCar from "@hooks/car/useCurrentCar";
+import {useContext, useEffect, useState} from "react";
 import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
 import {collection, doc, getDoc, getDocs, limit, orderBy, query} from "firebase/firestore";
 import {Refuel} from "@models/refuel";
 import {Car} from "@models/car";
+import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/CurrentCarContextProvider";
 
 const useCurrentCarMileage = () => {
   const {firestore, auth} = getFirebase();
   const [carMileage, setCarMileage] = useState<number>(0);
-  const {currentCar} = useCurrentCar();
+  const {currentCarId} = useContext(CurrentCarContext);
 
   useEffect(() => {
-    if (currentCar) {
+    if (currentCarId) {
       const getData = async () => {
-        const refuelCollectionRef = collection(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCar, FIRESTORE_COLLECTIONS.REFUELS);
-        const currentCarDocRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCar);
+        const refuelCollectionRef = collection(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCarId, FIRESTORE_COLLECTIONS.REFUELS);
+        const currentCarDocRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCarId);
 
         const lastRefuelQuery = query(
           refuelCollectionRef,
@@ -35,7 +35,7 @@ const useCurrentCarMileage = () => {
       };
       getData();
     }
-  }, [currentCar]);
+  }, [currentCarId]);
 
   return {
     carMileage

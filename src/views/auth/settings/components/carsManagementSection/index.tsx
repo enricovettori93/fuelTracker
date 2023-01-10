@@ -1,12 +1,13 @@
 import Card from "@components/card";
 import useListCars from "@views/auth/settings/components/carsManagementSection/hooks/useListCars";
 import {useTranslation} from "react-i18next";
-import useCurrentCar from "@hooks/car/useCurrentCar";
 import CarFormRow from "@views/auth/settings/components/carsManagementSection/components/carFormRow";
 import useSelectCurrentCar from "@views/auth/settings/components/carsManagementSection/hooks/useSelectCurrentCar";
 import DeleteCarModal from "@views/auth/settings/components/carsManagementSection/components/deleteItemModal";
 import {Link} from "react-router-dom";
 import {routes} from "@router";
+import {useContext} from "react";
+import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/CurrentCarContextProvider";
 
 const CarsManagementSection = () => {
   const {t} = useTranslation();
@@ -18,7 +19,7 @@ const CarsManagementSection = () => {
     handleDeleteClose,
     handleDelete,
   } = useListCars();
-  const {currentCar} = useCurrentCar();
+  const {currentCarId} = useContext(CurrentCarContext);
   const {setSelectedCar} = useSelectCurrentCar();
 
   const handleChangeSelectedCar = async (carId: string) => {
@@ -42,7 +43,16 @@ const CarsManagementSection = () => {
         !loading && cars.length > 0 && (
           <form action="#">
             {
-              cars.map(car => <CarFormRow key={car.id} car={car} onDeleteCar={handleDelete} onSelectCar={handleChangeSelectedCar} isChecked={car.id === currentCar} isDeleteButtonDisabled={car.id === currentCar} />)
+              cars.map(car =>
+                <CarFormRow
+                  key={car.id}
+                  car={car}
+                  isChecked={car.id === currentCarId}
+                  isDeleteButtonDisabled={car.id === currentCarId}
+                  onDeleteCar={handleDelete}
+                  onSelectCar={handleChangeSelectedCar}
+                />
+              )
             }
           </form>
         )

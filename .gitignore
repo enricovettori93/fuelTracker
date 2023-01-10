@@ -3,3 +3,4 @@ firebaseConfig/*
 !firebaseConfig/.gitkeep
 !firebaseConfig/config.example.json
 dist
+.idea
