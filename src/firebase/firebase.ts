@@ -4,9 +4,13 @@ import { getFirestore } from 'firebase/firestore';
 
 const env = process.env.NODE_ENV || 'development';
 
-const firebaseConfig = env === "production" ?
-  await import("../../firebaseConfig/config.prod.json") :
-  await import("../../firebaseConfig/config.develop.json");
+let firebaseConfig = {};
+
+(async () => {
+  firebaseConfig = env === "production" ?
+    await import("../../firebaseConfig/config.prod.json") :
+    await import("../../firebaseConfig/config.develop.json");
+})();
 
 function initialize() {
   const firebaseApp = initializeApp(firebaseConfig);
