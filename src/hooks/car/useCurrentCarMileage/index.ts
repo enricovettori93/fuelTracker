@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import useCurrentCar from "@hooks/useCurrentCar";
+import useCurrentCar from "@hooks/car/useCurrentCar";
 import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
 import {collection, doc, getDoc, getDocs, limit, orderBy, query} from "firebase/firestore";
 import {Refuel} from "@models/refuel";

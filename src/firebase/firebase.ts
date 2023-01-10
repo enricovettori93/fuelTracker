@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, browserLocalPersistence, setPersistence } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const env = process.env.NODE_ENV || 'development';
@@ -11,6 +11,9 @@ const firebaseConfig = env === "production" ?
 function initialize() {
   const firebaseApp = initializeApp(firebaseConfig);
   const auth = getAuth(firebaseApp);
+  (async () => {
+    await setPersistence(auth, browserLocalPersistence);
+  })();
   const firestore = getFirestore(firebaseApp);
   return { firebaseApp, auth, firestore };
 }

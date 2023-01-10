@@ -17,7 +17,7 @@ const AddCarForm = ({ onSubmit, submitButtonText }: AddCarFormProps) => {
     const formData = new FormData(e.target as HTMLFormElement);
     const model = formData.get("car-model")?.toString() ?? "";
     const initialKm = parseInt(formData.get("car-km")?.toString() ?? "0");
-    onSubmit({ model, initialKm, createdAt: new Date() });
+    onSubmit({ model, initialKm, createdAt: new Date(), selected: true });
   }
 
   return (

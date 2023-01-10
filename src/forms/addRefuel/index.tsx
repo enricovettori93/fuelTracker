@@ -3,17 +3,19 @@ import Card from "@components/card";
 import FormField from "@components/form/field";
 import {useTranslation} from "react-i18next";
 import {AddRefuel} from "@models/refuel";
-import usePosition from "@hooks/usePosition";
+import usePosition from "@hooks/generics/usePosition";
 import ButtonSubmit from "@components/form/buttonSubmit";
 
 interface addRefuelFormProps {
   onSubmit: ({date, actualKm, quantity}: AddRefuel) => void
   isLoading: boolean
+  isFormDisabled?: boolean
   minMileage?: number
+  errorMessage?: string | null
 }
 
 const AddRefuelForm = (props: addRefuelFormProps) => {
-  const {onSubmit, isLoading, minMileage = 0} = props;
+  const {onSubmit, isLoading, minMileage = 0, isFormDisabled = false, errorMessage = null} = props;
   const {t} = useTranslation();
   const {lat, lng, error} = usePosition();
 
@@ -58,8 +60,13 @@ const AddRefuelForm = (props: addRefuelFormProps) => {
             <p className="text-red-400 mb-5">{t("add-refuel.no-position-grant")}</p>
           )
         }
-        <div className="flex">
-          <ButtonSubmit icon={<i className="ci-plus_circle_outline"/>} isLoading={isLoading} text={t("add-refuel.form.submit")} className="btn bg-orange-500 w-full"/>
+        <div className="flex flex-col">
+          {
+            errorMessage && (
+              <p className="text-red-500 mb-4">{errorMessage}</p>
+            )
+          }
+          <ButtonSubmit icon={<i className="ci-plus_circle_outline"/>} isLoading={isLoading} isDisabled={isFormDisabled} text={t("add-refuel.form.submit")} className="btn bg-orange-500 w-full"/>
         </div>
       </Card>
     </form>

@@ -5,17 +5,19 @@ import {useTranslation} from "react-i18next";
 import {subtractMonths} from "@utilities";
 import ButtonSubmit from "@components/form/buttonSubmit";
 
-interface SelectRangeDateProps {
-  onSelect: ({from, to}: {from: string, to: string}) => void
+interface SelectRangeDatePropsForm {
   isLoading: boolean
+  isFormDisabled?: boolean
+  errorMessage?: string | null
+  onSelect: ({from, to}: {from: string, to: string}) => void
 }
 
-const SelectRangeDate = ({onSelect, isLoading = false}: SelectRangeDateProps) => {
+const SelectRangeDateForm = ({onSelect, isLoading = false, isFormDisabled = false, errorMessage = null}: SelectRangeDatePropsForm) => {
   const {t} = useTranslation();
   const [to, setTo] = useState(new Date().toISOString().slice(0,10));
   const [from, setFrom] = useState(subtractMonths(new Date(), 3).toISOString().slice(0,10));
 
-  const errorMessage = () => {
+  const dateErrorMessage = () => {
     const toDate = new Date(to);
     const fromDate = new Date(from);
 
@@ -33,7 +35,7 @@ const SelectRangeDate = ({onSelect, isLoading = false}: SelectRangeDateProps) =>
     e.preventDefault();
     e.stopPropagation();
 
-    if (!errorMessage()) {
+    if (!dateErrorMessage()) {
       onSelect({to, from});
     }
   }
@@ -54,14 +56,19 @@ const SelectRangeDate = ({onSelect, isLoading = false}: SelectRangeDateProps) =>
           </>
         </FormField>
         {
-          errorMessage() && (
-            <p className="text-red-400 mt-5">{errorMessage()}</p>
+          dateErrorMessage() && (
+            <p className="text-red-500 mt-5">{dateErrorMessage()}</p>
           )
         }
-        <ButtonSubmit className="w-full btn bg-orange-500 mt-10" isLoading={isLoading} text={t("chart-page.form.submit")}/>
+        {
+          errorMessage && (
+            <p className="text-red-500 mt-5">{errorMessage}</p>
+          )
+        }
+        <ButtonSubmit className="w-full btn bg-orange-500 mt-5" isLoading={isLoading} isDisabled={isFormDisabled} text={t("chart-page.form.submit")}/>
       </Card>
     </form>
   )
 }
 
-export default SelectRangeDate;
+export default SelectRangeDateForm;

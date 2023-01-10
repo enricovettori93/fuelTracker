@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Car} from "@models/car";
-import {collection, deleteDoc, doc, getDocs} from "firebase/firestore";
+import {collection, deleteDoc, doc, onSnapshot} from "firebase/firestore";
 import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
 import {toast} from "react-hot-toast";
 import {useTranslation} from "react-i18next";
@@ -26,19 +26,20 @@ const useListCars = () => {
   }
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        setLoading(true);
-        const myCarCollectionRef = collection(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS);
-        const myCarCollectionData = await getDocs(myCarCollectionRef);
-        setCars(myCarCollectionData.docs.map(car => ({id: car.id, ...car.data()} as Car)));
-      } catch (e) {
-        toast.error(t("settings.cars-management.fetch-ko"));
-      } finally {
-        setLoading(false);
-      }
+    const myCarCollectionRef = collection(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS);
+
+    setLoading(true);
+
+    const myCarSnapshot = onSnapshot(myCarCollectionRef, snapshot => {
+      setCars(snapshot.docs.map(car => ({id: car.id, ...car.data()} as Car)));
+      setLoading(false);
+    }, error => {
+      toast.error(t("settings.cars-management.fetch-ko"));
+    });
+
+    return () => {
+      myCarSnapshot();
     }
-    getData();
   }, []);
 
   const handleDelete = (id: string) => {

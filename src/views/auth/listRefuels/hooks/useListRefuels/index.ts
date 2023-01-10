@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Refuel} from "@models/refuel";
 import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
-import useCurrentCar from "@hooks/useCurrentCar";
+import useCurrentCar from "@hooks/car/useCurrentCar";
 import {collection, deleteDoc, doc, getDocs, limit, orderBy, query, startAfter} from "firebase/firestore";
 import {toast} from "react-hot-toast";
 import {useTranslation} from "react-i18next";

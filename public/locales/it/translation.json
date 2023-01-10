@@ -2,7 +2,8 @@
   "common": {
     "loading": "Caricamento...",
     "generic-error": "Errore nell'operazione",
-    "no-data-available": "Nessun dato disponibile"
+    "no-data-available": "Nessun dato disponibile",
+    "must-insert-car-first": "Prima di poter eseguire l'azione devi inserire un'automobile"
   },
   "sign-in": {
     "description": "Questa applicazione ti permette di tenere traccia dei consumi delle tue automobili andando a inserire manualmente i singoli rifornimenti!",

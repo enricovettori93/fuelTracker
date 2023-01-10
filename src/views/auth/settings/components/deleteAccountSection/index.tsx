@@ -1,14 +1,19 @@
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import Card from "@components/card";
-import DeleteAccountModal from "@views/auth/settings/components/deleteAccountSection/deleteAccountModal";
+import DeleteAccountModal from "@views/auth/settings/components/deleteAccountSection/components/deleteAccountModal";
+import useDeleteUserData from "@views/auth/settings/components/deleteAccountSection/hooks/useDeleteUserData";
+import useLogout from "@hooks/user/useLogout";
 
 const DeleteAccountSection = () => {
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState<boolean>(false);
   const {t} = useTranslation();
+  const {deleteUserData} = useDeleteUserData();
+  const {logout} = useLogout();
 
-  const handleModalSubmit = () => {
-    // todo: logic implementation
+  const handleModalSubmit = async () => {
+    await deleteUserData();
+    await logout();
   }
 
   const handleModalClose = () => {

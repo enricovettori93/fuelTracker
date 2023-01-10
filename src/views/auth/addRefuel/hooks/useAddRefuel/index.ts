@@ -1,5 +1,5 @@
 import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
-import useCurrentCar from "@hooks/useCurrentCar";
+import useCurrentCar from "@hooks/car/useCurrentCar";
 import {AddRefuel} from "@models/refuel";
 import {addDoc, collection} from "firebase/firestore";
 import {toast} from "react-hot-toast";

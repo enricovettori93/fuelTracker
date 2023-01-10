@@ -3,7 +3,7 @@ import AddCarForm from "@forms/addCar";
 import { useNavigate } from "react-router-dom";
 import {routes} from "@router";
 import {AddCar} from "@models/car";
-import useAddCar from "@hooks/useAddCar";
+import useAddCar from "@hooks/car/useAddCar";
 
 const WizardPage = () => {
   const {t} = useTranslation();
@@ -11,7 +11,7 @@ const WizardPage = () => {
   const {handleSubmitNewCar} = useAddCar();
 
   const handleSubmit = async ({model, initialKm, createdAt}: AddCar) => {
-    await handleSubmitNewCar({model, initialKm, createdAt}, true);
+    await handleSubmitNewCar({model, initialKm, createdAt, selected: true});
     navigate(routes.ADD_REFUEL);
   }
 

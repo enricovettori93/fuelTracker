@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import {useTranslation} from "react-i18next";
-import useClickOutside from "@hooks/useClickOutside";
+import useClickOutside from "@hooks/generics/useClickOutside";
 import FullScreenOverlay from "@components/fullScreenOverlay";
 
 interface ModalWrapperProps {

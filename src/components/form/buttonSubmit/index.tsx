@@ -6,17 +6,20 @@ interface ButtonSubmitProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactNode
   text: string
   isLoading: boolean
+  isDisabled?: boolean
 }
 
-const ButtonSubmit = ({isLoading, text, icon = null, className = "", ...restProps}: ButtonSubmitProps) => {
+const ButtonSubmit = ({isLoading, text, icon = null, className = "", isDisabled = false, ...restProps}: ButtonSubmitProps) => {
   return (
-    <button disabled={isLoading} className={`${className} disabled:opacity-75 flex justify-center items-center`} type="submit" {...restProps}>
+    <button disabled={isLoading || isDisabled} className={`${className} disabled:opacity-75 flex justify-center items-center`} type="submit" {...restProps}>
       {
         isLoading && (
           <Loader/>
         )
       }
-      {icon}
+      {
+        !isLoading && icon
+      }
       <span className="ml-5">{text}</span>
     </button>
   )

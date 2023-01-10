@@ -1,17 +1,15 @@
 import {useTranslation} from "react-i18next";
 import Card from "@components/card";
 import getFirebase from "@firebase/firebase";
-import {useNavigate} from "react-router-dom";
-import {routes} from "@router";
+import useLogout from "@hooks/user/useLogout";
 
 const MyAccountSection = () => {
   const {t} = useTranslation();
   const {auth} = getFirebase();
-  const navigate = useNavigate();
+  const {logout} = useLogout();
 
   const handleLogout = async () => {
-    await auth.signOut();
-    navigate(routes.LOGIN);
+    await logout();
   }
 
   return (

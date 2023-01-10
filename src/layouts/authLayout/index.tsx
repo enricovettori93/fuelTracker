@@ -1,7 +1,7 @@
 import Navbar from "@components/navbar";
 import CommonLayout, {LayoutProps} from "@layouts/commonLayout";
 import getFirebase from "@firebase/firebase";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {routes} from "@router";
 import {useEffect} from "react";
 
@@ -12,10 +12,11 @@ interface AuthLayoutProps extends LayoutProps {
 const AuthLayout = ({ titleKey, children, withNavbar = true }: AuthLayoutProps) => {
   const { auth } = getFirebase();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (!auth.currentUser) {
-      navigate(routes.LOGIN);
+      navigate({ pathname: routes.LOGIN, search: `?returnUrl=${location.pathname}` });
     }
   }, [auth.currentUser]);
 

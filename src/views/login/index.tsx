@@ -1,15 +1,14 @@
 import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
-import {useCallback} from "react";
-import {doc, getDoc} from 'firebase/firestore';
+import {useCallback, useEffect} from "react";
+import {doc, getDoc, setDoc} from 'firebase/firestore';
 import {
   GoogleAuthProvider,
   signInWithPopup
 } from "firebase/auth";
 import {useTranslation} from "react-i18next";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {routes} from "@router";
-import useCurrentCar from "@hooks/useCurrentCar";
-import useSelectCurrentCar from "@hooks/useSelectCurrentCar";
+import useCurrentCar from "@hooks/car/useCurrentCar";
 import Card from "@components/card";
 import GoogleLogo from "@assets/google-icon.webp";
 
@@ -18,22 +17,34 @@ const Login = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { currentCar } = useCurrentCar();
-  const { setSelectedCar } = useSelectCurrentCar();
+  const [urlSearchParams] = useSearchParams();
 
-  const signInWithGoogle = useCallback(() => {
-    signInWithPopup(auth, new GoogleAuthProvider()).then(async user => {
-      const currentUserRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, user.user.uid);
-      const currentUserSnap = await getDoc(currentUserRef);
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      await handleUserFlow();
+    })
+  }, [auth]);
 
-      if (!currentUserSnap.exists()) {
-        await setSelectedCar(null);
-
-        navigate(routes.WIZARD);
-      } else {
-        navigate(routes.ADD_REFUEL);
-      }
+  const signInWithGoogle = useCallback(async () => {
+    signInWithPopup(auth, new GoogleAuthProvider()).then(async (user) => {
+      await handleUserFlow();
     });
   }, [auth, currentCar]);
+
+  const handleUserFlow = async () => {
+    const currentUserRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid);
+    const currentUserSnap = await getDoc(currentUserRef);
+    let nextRoute = "";
+
+    if (!currentUserSnap.exists()) {
+      await setDoc(doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid), {});
+      nextRoute = routes.WIZARD;
+    } else {
+      nextRoute = urlSearchParams.get('returnUrl') ?? routes.ADD_REFUEL;
+    }
+
+    navigate(nextRoute);
+  }
 
   return (
     <div className="mt-auto">
