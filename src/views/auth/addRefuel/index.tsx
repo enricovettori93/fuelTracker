@@ -6,7 +6,7 @@ import useAddRefuel from "@views/auth/addRefuel/hooks/useAddRefuel";
 import useCurrentCarMileage from "@hooks/car/useCurrentCarMileage";
 import {useTranslation} from "react-i18next";
 import {useContext} from "react";
-import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/CurrentCarContextProvider";
+import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/currentCar.context";
 
 const AddRefuelPage = () => {
   const {t} = useTranslation();

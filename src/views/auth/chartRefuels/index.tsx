@@ -5,7 +5,7 @@ import useSearchRefuel from "@views/auth/chartRefuels/hooks/useSearchRefuel";
 import {useTranslation} from "react-i18next";
 import RefuelsGraph from "@views/auth/chartRefuels/components/refuelsGraph";
 import FullScreenOverlay from "@components/fullScreenOverlay";
-import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/CurrentCarContextProvider";
+import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/currentCar.context";
 
 const fullScreenChartOptions = {
   responsive: false

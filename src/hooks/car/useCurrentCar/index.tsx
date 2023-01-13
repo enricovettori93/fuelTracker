@@ -1,14 +1,14 @@
-import {useEffect, useState} from "react";
-import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
+import {useContext, useEffect, useState} from "react";
+import {FirebaseContext, FIRESTORE_COLLECTIONS} from "@contexts/firebase.context";
 import {collection, onSnapshot} from "firebase/firestore";
 import {Car} from "@models/car";
 
 const useCurrentCar = () => {
-  const {firestore, auth} = getFirebase();
+  const {firestore, auth} = useContext(FirebaseContext);
   const [currentCar, setCurrentCar] = useState<string | null>(null);
 
   useEffect(() => {
-    if (auth.currentUser) {
+    if (firestore && auth && auth.currentUser) {
       const currentUserCarsRef = collection(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS);
 
       const userCarsSnapshot = onSnapshot(currentUserCarsRef, snapshot => {
@@ -22,7 +22,7 @@ const useCurrentCar = () => {
         userCarsSnapshot();
       }
     }
-  }, [auth.currentUser, firestore]);
+  }, [auth, firestore]);
 
   return { currentCar };
 }

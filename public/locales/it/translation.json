@@ -5,6 +5,10 @@
     "no-data-available": "Nessun dato disponibile",
     "must-insert-car-first": "Prima di poter eseguire l'azione devi inserire un'automobile"
   },
+  "not-found": {
+    "title": "Pagina non trovata",
+    "description": "Torna alla homepage"
+  },
   "sign-in": {
     "description": "Questa applicazione ti permette di tenere traccia dei consumi delle tue automobili andando a inserire manualmente i singoli rifornimenti!",
     "google-button": "Login con Google"

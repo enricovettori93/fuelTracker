@@ -7,7 +7,7 @@ import DeleteCarModal from "@views/auth/settings/components/carsManagementSectio
 import {Link} from "react-router-dom";
 import {routes} from "@router";
 import {useContext} from "react";
-import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/CurrentCarContextProvider";
+import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/currentCar.context";
 
 const CarsManagementSection = () => {
   const {t} = useTranslation();

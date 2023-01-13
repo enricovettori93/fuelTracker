@@ -11,6 +11,7 @@ import CommonLayout from "@layouts/commonLayout";
 import AuthLayout from "@layouts/authLayout";
 import ChartRefuels from "@views/auth/chartRefuels";
 import Login from "@views/login";
+import NotFound from "@views/notFound";
 
 export const routes = {
   ROOT: "/",
@@ -71,6 +72,11 @@ const router = createBrowserRouter([
       <AuthLayout titleKey="settings.title">
         <Settings />
       </AuthLayout>,
+  },
+  {
+    path: "*",
+    element:
+      <NotFound />
   }
 ]);
 

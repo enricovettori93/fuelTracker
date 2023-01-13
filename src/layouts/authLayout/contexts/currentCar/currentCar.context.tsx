@@ -1,12 +1,15 @@
 import React from "react";
-import {ICurrentCarContext} from "@layouts/authLayout/contexts/currentCar/CurrentCarContext";
 import useCurrentCar from "@hooks/car/useCurrentCar";
+
+interface ICurrentCarContext {
+  currentCarId: string | null
+}
 
 export const CurrentCarContext = React.createContext<ICurrentCarContext>({
   currentCarId: null
 });
 
-const CurrentCarContextProvider = (props: React.PropsWithChildren<any>) => {
+const CurrentCarProvider = (props: React.PropsWithChildren<any>) => {
   const {children} = props;
   const {currentCar} = useCurrentCar();
 
@@ -17,4 +20,4 @@ const CurrentCarContextProvider = (props: React.PropsWithChildren<any>) => {
   )
 }
 
-export default CurrentCarContextProvider;
+export default CurrentCarProvider;

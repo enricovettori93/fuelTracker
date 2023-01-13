@@ -1,5 +1,5 @@
-import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
-import {useCallback, useEffect} from "react";
+import {FirebaseContext, FIRESTORE_COLLECTIONS} from "@contexts/firebase.context";
+import {useCallback, useContext, useEffect} from "react";
 import {doc, getDoc, setDoc} from 'firebase/firestore';
 import {
   GoogleAuthProvider,
@@ -13,31 +13,33 @@ import Card from "@components/card";
 import GoogleLogo from "@assets/google-icon.webp";
 
 const Login = () => {
-  const { firestore, auth } = getFirebase();
+  const { firestore, auth } = useContext(FirebaseContext);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { currentCar } = useCurrentCar();
   const [urlSearchParams] = useSearchParams();
 
   useEffect(() => {
-    auth.onAuthStateChanged(async (user) => {
-      await handleUserFlow();
+    auth!.onAuthStateChanged(async (user) => {
+      if (user) {
+        await handleUserFlow();
+      }
     })
   }, [auth]);
 
   const signInWithGoogle = useCallback(async () => {
-    signInWithPopup(auth, new GoogleAuthProvider()).then(async (user) => {
+    signInWithPopup(auth!, new GoogleAuthProvider()).then(async (user) => {
       await handleUserFlow();
     });
   }, [auth, currentCar]);
 
   const handleUserFlow = async () => {
-    const currentUserRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid);
+    const currentUserRef = doc(firestore!, FIRESTORE_COLLECTIONS.USERS, auth!.currentUser!.uid);
     const currentUserSnap = await getDoc(currentUserRef);
     let nextRoute = "";
 
     if (!currentUserSnap.exists()) {
-      await setDoc(doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid), {});
+      await setDoc(doc(firestore!, FIRESTORE_COLLECTIONS.USERS, auth!.currentUser!.uid), {});
       nextRoute = routes.WIZARD;
     } else {
       nextRoute = urlSearchParams.get('returnUrl') ?? routes.ADD_REFUEL;

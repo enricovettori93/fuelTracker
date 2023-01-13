@@ -1,14 +1,14 @@
 import {useContext, useEffect, useState} from "react";
 import {Refuel} from "@models/refuel";
-import getFirebase, {FIRESTORE_COLLECTIONS} from "@firebase/firebase";
+import {FirebaseContext, FIRESTORE_COLLECTIONS} from "@contexts/firebase.context";
 import {collection, deleteDoc, doc, getDocs, limit, orderBy, query, startAfter} from "firebase/firestore";
 import {toast} from "react-hot-toast";
 import {useTranslation} from "react-i18next";
-import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/CurrentCarContextProvider";
+import {CurrentCarContext} from "@layouts/authLayout/contexts/currentCar/currentCar.context";
 
 const useListRefuels = () => {
   const {t} = useTranslation();
-  const {firestore, auth} = getFirebase();
+  const {firestore, auth} = useContext(FirebaseContext);
   const {currentCarId} = useContext(CurrentCarContext);
   const QUERY_LIMIT = 50;
   const [refuels, setRefuels] = useState<Refuel[]>([]);
@@ -24,7 +24,7 @@ const useListRefuels = () => {
 
   const fetch = async () => {
     try {
-      const myRefuelsCollection = collection(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCarId as string, FIRESTORE_COLLECTIONS.REFUELS);
+      const myRefuelsCollection = collection(firestore!, FIRESTORE_COLLECTIONS.USERS, auth!.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCarId as string, FIRESTORE_COLLECTIONS.REFUELS);
       setLoading(true);
       let refuelQuery;
 
@@ -56,7 +56,7 @@ const useListRefuels = () => {
   const handleDeleteSubmit = async () => {
     if (deletingItemId) {
       try {
-        const detailRefuelRef = doc(firestore, FIRESTORE_COLLECTIONS.USERS, auth.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCarId as string, FIRESTORE_COLLECTIONS.REFUELS, deletingItemId);
+        const detailRefuelRef = doc(firestore!, FIRESTORE_COLLECTIONS.USERS, auth!.currentUser!.uid, FIRESTORE_COLLECTIONS.CARS, currentCarId as string, FIRESTORE_COLLECTIONS.REFUELS, deletingItemId);
         await deleteDoc(detailRefuelRef);
         handleDeleteClose();
         setRefuels(prevState => prevState.filter(item => item.id !== deletingItemId));
