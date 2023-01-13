@@ -12,10 +12,12 @@ import AuthLayout from "@layouts/authLayout";
 import ChartRefuels from "@views/auth/chartRefuels";
 import Login from "@views/login";
 import NotFound from "@views/notFound";
+import ProtectedRoute from "@components/protectedRoute";
 
 export const routes = {
   ROOT: "/",
   LOGIN: "/login",
+  APP: "/app",
   WIZARD: "/app/wizard",
   ADD_REFUEL: "/app/add",
   LIST_REFUELS: "/app/list",
@@ -39,39 +41,52 @@ const router = createBrowserRouter([
       </CommonLayout>,
   },
   {
-    path: routes.WIZARD,
-    element:
-      <AuthLayout titleKey="wizard.title" withNavbar={false}>
-        <Wizard />
-      </AuthLayout>,
-  },
-  {
-    path: routes.ADD_REFUEL,
-    element:
-      <AuthLayout titleKey="add-refuel.title">
-        <AddRefuel />
-      </AuthLayout>,
-  },
-  {
-    path: routes.LIST_REFUELS,
-    element:
-      <AuthLayout titleKey="list-refuels.title">
-        <ListRefuels />
-      </AuthLayout>,
-  },
-  {
-    path: routes.CHART_REFUELS,
-    element:
-      <AuthLayout titleKey="chart-refuels.title">
-        <ChartRefuels />
-      </AuthLayout>,
-  },
-  {
-    path: routes.SETTINGS,
-    element:
-      <AuthLayout titleKey="settings.title">
-        <Settings />
-      </AuthLayout>,
+    path: routes.APP,
+    element: <ProtectedRoute />,
+    children: [
+      {
+        index: true,
+        element: null,
+        loader: function () {
+          throw redirect(routes.ADD_REFUEL);
+        }
+      },
+      {
+        path: routes.WIZARD,
+        element:
+          <AuthLayout titleKey="wizard.title" withNavbar={false}>
+            <Wizard />
+          </AuthLayout>,
+      },
+      {
+        path: routes.ADD_REFUEL,
+        element:
+          <AuthLayout titleKey="add-refuel.title">
+            <AddRefuel />
+          </AuthLayout>,
+      },
+      {
+        path: routes.LIST_REFUELS,
+        element:
+          <AuthLayout titleKey="list-refuels.title">
+            <ListRefuels />
+          </AuthLayout>,
+      },
+      {
+        path: routes.CHART_REFUELS,
+        element:
+          <AuthLayout titleKey="chart-refuels.title">
+            <ChartRefuels />
+          </AuthLayout>,
+      },
+      {
+        path: routes.SETTINGS,
+        element:
+          <AuthLayout titleKey="settings.title">
+            <Settings />
+          </AuthLayout>,
+      },
+    ],
   },
   {
     path: "*",
