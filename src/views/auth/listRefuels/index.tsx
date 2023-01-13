@@ -2,6 +2,8 @@ import {useTranslation} from "react-i18next";
 import ListItem from "@views/auth/listRefuels/components/listItem";
 import DeleteItemModal from "@views/auth/listRefuels/components/deleteItemModal";
 import useListConsumption from "@views/auth/listRefuels/hooks/useListRefuels";
+import Loader from "@components/loader";
+import React from "react";
 
 const ListRefuelsPage = () => {
   const {t} = useTranslation();
@@ -20,7 +22,10 @@ const ListRefuelsPage = () => {
     <section>
       {
         loading && (
-          <p>{t("common.loading")}</p>
+          <div className="flex">
+            <Loader className="w-6 h-6 border-orange-500 mr-5"/>
+            <span>{t("common.loading")}</span>
+          </div>
         )
       }
       {

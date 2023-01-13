@@ -4,3 +4,4 @@ firebaseConfig/*
 !firebaseConfig/config.example.json
 dist
 .idea
+.firebase

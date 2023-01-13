@@ -1,12 +1,10 @@
-import React from "react";
-
 interface LoaderProps {
   className?: string
 }
-const Loader = ({className = ""}: LoaderProps) => {
+const Loader = ({className = "w-6 h-6 border-white"}: LoaderProps) => {
   return (
-    <div className={`w-6 h-6 rounded-full animate-spin border border-solid border-white border-t-transparent ${className}`}></div>
+    <div className={`rounded-full animate-spin border border-solid border-t-transparent ${className}`}></div>
   )
 }
 
-export default React.memo(Loader);
+export default Loader;
