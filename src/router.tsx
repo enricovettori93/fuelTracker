@@ -36,7 +36,7 @@ const router = createBrowserRouter([
   {
     path: routes.LOGIN,
     element:
-      <CommonLayout titleKey="wizard.title">
+      <CommonLayout>
         <Login />
       </CommonLayout>,
   },

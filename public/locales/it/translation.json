@@ -10,7 +10,7 @@
     "description": "Torna alla homepage"
   },
   "sign-in": {
-    "description": "Questa applicazione ti permette di tenere traccia dei consumi delle tue automobili andando a inserire manualmente i singoli rifornimenti!",
+    "description": "Con questa applicazione potrai tracciare i consumi delle tue automobili nel corso del tempo.",
     "google-button": "Login con Google"
   },
   "wizard": {

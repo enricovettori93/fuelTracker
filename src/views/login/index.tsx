@@ -11,6 +11,7 @@ import {routes} from "@router";
 import useCurrentCar from "@hooks/car/useCurrentCar";
 import Card from "@components/card";
 import GoogleLogo from "@assets/google-icon.webp";
+import logo from "@assets/logo.png";
 
 const Login = () => {
   const { firestore, auth } = useContext(FirebaseContext);
@@ -49,11 +50,12 @@ const Login = () => {
   }
 
   return (
-    <div className="mt-auto">
+    <div className="mt-auto mb-auto">
       <Card>
+        <img className="mb-12" src={logo} alt="logo"/>
         <p>{t("sign-in.description")}</p>
         <div>
-          <button className="text-gray-700 mt-10 flex items-center justify-center w-full" onClick={signInWithGoogle}>
+          <button className="text-gray-700 my-10 flex items-center justify-center w-full" onClick={signInWithGoogle}>
             <img src={GoogleLogo} alt="google-logo" className="h-5 mr-3"/>
             {t("sign-in.google-button")}
           </button>
