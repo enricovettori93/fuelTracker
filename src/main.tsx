@@ -6,9 +6,7 @@ import App from "@app";
 import FirebaseProvider from "@contexts/firebase.context";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <FirebaseProvider>
-      <App/>
-    </FirebaseProvider>
-  </React.StrictMode>,
+  <FirebaseProvider>
+    <App/>
+  </FirebaseProvider>
 )
