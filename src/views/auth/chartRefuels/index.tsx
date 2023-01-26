@@ -74,7 +74,7 @@ const ChartRefuelsPage = () => {
             <Card className="relative w-[80vw] h-[90vh]">
               <i className="ci-shrink absolute bottom-3 right-3 cursor:pointer" onClick={toggleFullScreenOverlay}/>
               <div className="w-full h-full inset-0 relative flex justify-center items-center">
-                <RefuelsGraph refuels={refuels} options={fullScreenChartOptions} className="portrait:rotate-90 scale-[1.7]"/>
+                <RefuelsGraph refuels={refuels} fullScreen options={fullScreenChartOptions} className="portrait:rotate-90 scale-[1.7]"/>
               </div>
             </Card>
           </FullScreenOverlay>

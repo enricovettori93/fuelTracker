@@ -1,4 +1,4 @@
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,6 +9,7 @@ import {
 } from 'chart.js';
 import {ChartProps, Line} from 'react-chartjs-2';
 import {Refuel} from "@models/refuel";
+import {useTranslation} from "react-i18next";
 
 ChartJS.register(
   CategoryScale,
@@ -24,25 +25,33 @@ const chartOptions = {
 
 interface LineGraphProps extends Omit<ChartProps, "data" | "type"> {
   refuels: Refuel[]
+  fullScreen?: boolean
 }
 
-const RefuelsGraph = ({refuels, ...restProps}: LineGraphProps) => {
+const RefuelsGraph = ({refuels, fullScreen = false, ...restProps}: LineGraphProps) => {
+  const {t} = useTranslation();
+  const [averageConsumption, setAverageConsumption] = useState<number>(0);
   const chartData = useMemo(() => {
     const labels: string[] = []
-    const averageConsumption: number[] = [];
+    const data: number[] = [];
+    let sumConsumption: number = 0;
 
     if (refuels.length > 1) {
       refuels.forEach((refuel, index) => {
         labels.push(refuel.actualKm.toString());
         if (index > 0) {
-          averageConsumption.push((refuel.actualKm - refuels[index - 1].actualKm) / refuel.quantity);
+          const consumption = (refuel.actualKm - refuels[index - 1].actualKm) / refuel.quantity;
+          data.push(consumption);
+          sumConsumption += consumption;
         }
       });
     }
 
+    setAverageConsumption(sumConsumption / data.length);
+
     const datasets = [
       {
-        data: averageConsumption,
+        data,
         borderColor: 'rgb(249, 115, 22)',
         backgroundColor: 'rgba(249, 115, 22, 0.5)',
       }
@@ -60,7 +69,14 @@ const RefuelsGraph = ({refuels, ...restProps}: LineGraphProps) => {
   }
 
   return (
-    <Line data={chartData} {...allProps}/>
+    <>
+      <Line data={chartData} {...allProps}/>
+      {
+        !fullScreen && (
+          <p className="font-bold mt-4 text-center">{t("chart-page.average-consumption")} - {averageConsumption.toFixed(2)} KM / L</p>
+        )
+      }
+    </>
   )
 }
 
