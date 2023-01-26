@@ -3,16 +3,17 @@ import {
   createBrowserRouter,
   redirect,
 } from "react-router-dom";
-import Wizard from "@views/auth/wizard";
-import AddRefuel from "@views/auth/addRefuel";
-import ListRefuels from "@views/auth/listRefuels";
-import Settings from "@views/auth/settings";
 import CommonLayout from "@layouts/commonLayout";
 import AuthLayout from "@layouts/authLayout";
-import ChartRefuels from "@views/auth/chartRefuels";
-import Login from "@views/login";
-import NotFound from "@views/notFound";
-import ProtectedRoute from "@components/protectedRoute";
+import FullScreenLoader from "@components/fullScreenLoader";
+const Wizard = React.lazy(() => import("@views/auth/wizard"));
+const AddRefuel = React.lazy(() => import("@views/auth/addRefuel"));
+const ListRefuels = React.lazy(() => import("@views/auth/listRefuels"));
+const Settings = React.lazy(() => import("@views/auth/settings"));
+const ChartRefuels = React.lazy(() => import( "@views/auth/chartRefuels"));
+const Login = React.lazy(() => import( "@views/login"));
+const NotFound = React.lazy(() => import( "@views/notFound"));
+const ProtectedRoute = React.lazy(() => import( "@components/protectedRoute"));
 
 export const routes = {
   ROOT: "/",
@@ -37,7 +38,9 @@ const router = createBrowserRouter([
     path: routes.LOGIN,
     element:
       <CommonLayout>
-        <Login />
+        <React.Suspense fallback={<FullScreenLoader show={true}/>}>
+          <Login />
+        </React.Suspense>
       </CommonLayout>,
   },
   {
@@ -55,35 +58,45 @@ const router = createBrowserRouter([
         path: routes.WIZARD,
         element:
           <AuthLayout titleKey="wizard.title" withNavbar={false}>
-            <Wizard />
+            <React.Suspense fallback={<FullScreenLoader show={true}/>}>
+              <Wizard />
+            </React.Suspense>
           </AuthLayout>,
       },
       {
         path: routes.ADD_REFUEL,
         element:
           <AuthLayout titleKey="add-refuel.title">
-            <AddRefuel />
+            <React.Suspense fallback={<FullScreenLoader show={true}/>}>
+              <AddRefuel />
+            </React.Suspense>
           </AuthLayout>,
       },
       {
         path: routes.LIST_REFUELS,
         element:
           <AuthLayout titleKey="list-refuels.title">
-            <ListRefuels />
+            <React.Suspense fallback={<FullScreenLoader show={true}/>}>
+              <ListRefuels />
+            </React.Suspense>
           </AuthLayout>,
       },
       {
         path: routes.CHART_REFUELS,
         element:
           <AuthLayout titleKey="chart-refuels.title">
-            <ChartRefuels />
+            <React.Suspense fallback={<FullScreenLoader show={true}/>}>
+              <ChartRefuels />
+            </React.Suspense>
           </AuthLayout>,
       },
       {
         path: routes.SETTINGS,
         element:
           <AuthLayout titleKey="settings.title">
-            <Settings />
+            <React.Suspense fallback={<FullScreenLoader show={true}/>}>
+              <Settings />
+            </React.Suspense>
           </AuthLayout>,
       },
     ],
