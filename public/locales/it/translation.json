@@ -83,6 +83,7 @@
     }
   },
   "chart-page": {
+    "no-enough-data-available": "Devi inserire più dati per visualizzare il grafico",
     "form": {
       "from": "Da",
       "to": "A",

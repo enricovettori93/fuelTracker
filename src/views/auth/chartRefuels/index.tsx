@@ -13,6 +13,7 @@ const fullScreenChartOptions = {
 };
 
 const ChartRefuelsPage = () => {
+  const MIN_CHART_DATA = 3;
   const {t} = useTranslation();
   const [showChart, setShowChart] = useState<boolean>(false);
   const [showChartFullScreen, setShowChartFullScreen] = useState<boolean>(false);
@@ -43,15 +44,26 @@ const ChartRefuelsPage = () => {
           )
         }
         {
-          refuels.length === 0 && !loading && (
-            <span>{t("common.no-data-available")}</span>
-          )
-        }
-        {
-          refuels.length > 1 && !loading && (
+          !loading && (
             <>
-              <i className="ci-expand absolute top-3 right-3 cursor:pointer" onClick={toggleFullScreenOverlay}/>
-              <RefuelsGraph refuels={refuels}/>
+              {
+                refuels.length === 0 && (
+                  <span>{t("common.no-data-available")}</span>
+                )
+              }
+              {
+                refuels.length > 0 && refuels.length < MIN_CHART_DATA && (
+                  <span>{t("chart.no-enough-data-available")}</span>
+                )
+              }
+              {
+                refuels.length >= MIN_CHART_DATA && (
+                  <>
+                    <i className="ci-expand absolute top-3 right-3 cursor:pointer" onClick={toggleFullScreenOverlay}/>
+                    <RefuelsGraph refuels={refuels}/>
+                  </>
+                )
+              }
             </>
           )
         }

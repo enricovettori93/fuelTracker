@@ -22,7 +22,7 @@ const MenuLink = ({ children, ...restProps }: MenuLinkProps) => {
 
 const Navbar = () => {
   return (
-    <nav className="navbar fixed w-screen h-28 bottom-0 left-0 right-0 bg-white flex p-6 items-center justify-between rounded-t-3xl">
+    <nav className="navbar fixed w-screen h-24 bottom-0 left-0 right-0 bg-white flex p-6 items-center justify-between rounded-t-3xl">
       <MenuLink to={routes.ADD_REFUEL}>
         <i className="ci-add_to_queue"/>
       </MenuLink>

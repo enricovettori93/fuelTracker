@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     path: routes.ROOT,
     element: null,
     loader: function () {
-      throw redirect(routes.WIZARD);
+      throw redirect(routes.ADD_REFUEL);
     }
   },
   {
