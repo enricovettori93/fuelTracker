@@ -30,7 +30,7 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
 
   return (
     <li>
-      <Card className={`${className} transition-all ${isOpen ? cardOpenStyle() : 'h-32 overflow-hidden'}`}>
+      <Card className={`${className} will-change-auto transition-all duration-300 overflow-hidden ${isOpen ? cardOpenStyle() : 'h-32'}`}>
         <div ref={topRef} className="flex justify-between">
           <div className="flex items-center">
             <i className="ci-calendar"/>
@@ -40,8 +40,10 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
             <button onClick={(e) => {e.preventDefault(); e.stopPropagation(); onDelete(id)}} className="mr-4">
               <i className="ci-trash_full"/>
             </button>
-            <button onClick={() => setIsOpen(prev => !prev)} className={`transition-all ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
-              <i className="ci-chevron_down"/>
+            <button onClick={() => setIsOpen(prev => !prev)}>
+              {
+                isOpen ? <i className="ci-chevron_up"/> : <i className="ci-chevron_down"/>
+              }
             </button>
           </div>
         </div>
@@ -59,7 +61,7 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
             <span className="ml-3">{quantity}</span>
           </div>
         </div>
-        <div ref={contentRef} className={`mt-4 transition-all ${isOpen ? 'opacity-1' : 'opacity-0'}`}>
+        <div ref={contentRef} className={`mt-4 transition-all duration-300 ${isOpen ? 'opacity-1' : 'opacity-0'}`}>
           {
             !isMapAvailable && (
               <span>
