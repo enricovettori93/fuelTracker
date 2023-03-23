@@ -3,9 +3,9 @@ A SPA built for tracking your car's fuel consumption
 
 ## Environments
 
-`firebase use develop`: develop
+`firebase use develop`
 
-`firebase use default`: **prod**
+`firebase use default`
 
 ## Deploy
 - Build the app: `npm run build`

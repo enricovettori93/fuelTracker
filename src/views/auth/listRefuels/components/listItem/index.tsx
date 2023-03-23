@@ -20,9 +20,17 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
     return !!lat && !!lng;
   }, [refuel]);
 
+  const cardOpenStyle = () => {
+    return isMapAvailable ? 'h-[19rem]' : 'h-[11rem]';
+  }
+
+  const buildMapSrc = (lat: number, lng: number) => {
+    return `https://maps.google.com/maps?q=${lat}, ${lng}&z=15&output=embed`;
+  }
+
   return (
     <li>
-      <Card className={className}>
+      <Card className={`${className} transition-all ${isOpen ? cardOpenStyle() : 'h-32 overflow-hidden'}`}>
         <div ref={topRef} className="flex justify-between">
           <div className="flex items-center">
             <i className="ci-calendar"/>
@@ -51,24 +59,20 @@ const ListItem = ({ refuel, onDelete, className = "" }: ListItemProps) => {
             <span className="ml-3">{quantity}</span>
           </div>
         </div>
-        {
-          isOpen && (
-            <div ref={contentRef} className={`mt-4`}>
-              {
-                !isMapAvailable && (
-                  <span>
-                    {t("list-refuels.card.no-geolocation-available")}
-                  </span>
-                )
-              }
-              {
-                isMapAvailable && (
-                  <iframe src={`https://maps.google.com/maps?q=${lat}, ${lng}&z=15&output=embed`} width="100%" height="100%" frameBorder="0" />
-                )
-              }
-            </div>
-          )
-        }
+        <div ref={contentRef} className={`mt-4 transition-all ${isOpen ? 'opacity-1' : 'opacity-0'}`}>
+          {
+            !isMapAvailable && (
+              <span>
+              {t("list-refuels.card.no-geolocation-available")}
+            </span>
+            )
+          }
+          {
+            isMapAvailable && (
+              <iframe src={buildMapSrc(lat as number, lng as number)} width="100%" height="100%" frameBorder="0" />
+            )
+          }
+        </div>
       </Card>
     </li>
   )

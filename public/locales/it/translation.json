@@ -23,7 +23,7 @@
     }
   },
   "add-refuel": {
-    "title": "Nuovo dato",
+    "title": "Nuovo rifornimento",
     "no-position-grant": "Non riesco ad accedere ai servizi di posizione 😔",
     "form": {
       "date": "Effettuato il",

@@ -9,7 +9,7 @@ interface MenuLinkProps extends NavLinkProps {
 const MenuLink = ({ children, ...restProps }: MenuLinkProps) => {
   return (
     <NavLink {...restProps} className={({ isActive }) => {
-      const commonClasses = "transition-all text-center p-4 rounded-full";
+      const commonClasses = "transition-all text-center p-[.7rem] rounded-full h-[3rem] w-[3rem]";
       if (isActive) {
         return `${commonClasses} bg-orange-100 text-orange-600`;
       }
@@ -22,7 +22,7 @@ const MenuLink = ({ children, ...restProps }: MenuLinkProps) => {
 
 const Navbar = () => {
   return (
-    <nav className="navbar fixed w-screen h-24 bottom-0 left-0 right-0 bg-white flex p-6 items-center justify-between rounded-t-3xl shadow-[0_35px_40px_15px_rgba(0,0,0,0.3)]">
+    <nav className="navbar fixed w-screen h-20 bottom-0 left-0 right-0 bg-white flex p-6 items-center justify-between rounded-t-3xl shadow-[0_35px_40px_15px_rgba(0,0,0,0.3)]">
       <MenuLink to={routes.ADD_REFUEL}>
         <i className="ci-add_to_queue"/>
       </MenuLink>
